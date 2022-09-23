@@ -1,0 +1,10 @@
+.content-grid {
+  @apply container max-w-screen-2xl mx-auto grid grid-cols-header gap-4;
+}
+.grid-main {
+  @apply grid-cols-mainContent;
+}
+
+.grid-header {
+  @apply grid-cols-header;
+}

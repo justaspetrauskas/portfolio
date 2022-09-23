@@ -1,0 +1,3 @@
+.content-wrapper {
+  @apply container max-w-screen-2xl mx-auto;
+}

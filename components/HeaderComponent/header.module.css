@@ -1,0 +1,60 @@
+.container {
+  @apply fixed top-0 w-full left-0 z-[99];
+  /* bg-portfolio_white */
+}
+
+.nav-container {
+  @apply mx-auto w-[calc(95vw)] lg:w-[calc(80vw)]
+
+  flex items-center justify-between py-6;
+}
+
+.navbar-navigation {
+  @apply hidden 
+  font-semibold text-portfolio_grey_light/90
+  md:flex flex-row items-center gap-12 text-lg;
+}
+
+/* hide/reveal navigation on scroll */
+.is-hidden {
+  transform: translateY(-101%);
+  transition: transform 0.5s cubic-bezier(0.5, 0, 0, 1);
+}
+
+.is-hidden li.navigation-item {
+  transform: translateY(-101%);
+  transition: transform 0.5s cubic-bezier(0.5, 0, 0, 1);
+}
+
+/* mobile navigation */
+.navbar--mobile {
+  @apply fixed top-0
+  md:hidden
+  flex flex-col
+  border-r border-[#1A422A] shadow-lg px-4
+  items-center justify-center
+  bg-slate-50
+  w-[40vw]
+   h-screen
+  overflow-hidden
+  left-0
+ z-[95];
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.4s;
+}
+
+.navbar--mobile-closed {
+  @apply -translate-x-full;
+}
+
+.navbar--mobile-open {
+  @apply translate-x-0;
+}
+.navbar-navigation--mobile {
+  @apply grid-flow-row
+  auto-rows-max gap-y-14 text-2xl;
+  font-weight: 400;
+}
+
+.navbar-navigation--mobile li:not(:last-child) {
+  @apply mb-[1rem];
+}

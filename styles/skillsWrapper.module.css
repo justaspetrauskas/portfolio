@@ -1,0 +1,6 @@
+.wrapper {
+  @apply flex flex-row flex-wrap 
+  
+  
+  min-h-[320px] h-auto overflow-auto;
+}
