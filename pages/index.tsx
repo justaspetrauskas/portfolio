@@ -2,7 +2,7 @@ import groq from "groq";
 import Head from "next/head";
 import Image from "next/image";
 import sanityClient from "../client";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProfile, setProfileData } from "../redux/slices/profileSlice";
 import Header from "../components/HeaderComponent/Header";
@@ -13,72 +13,43 @@ import ContactSection from "../sections/Contact.Section/Contact.Section";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import ScrollableContainer from "../components/ScrollableContainer/ScrollableContainer";
 
+import { animated, useSpring } from "react-spring";
+import useWindowSize, { Size } from "../hooks/useWindowSize";
+import useWindowScroll from "../hooks/useWindowScroll";
+
 interface HomeProps {
   profileData: any;
 }
 const Home = ({ profileData }: HomeProps) => {
-  const scrollContainerRef = useRef<any>(null);
+  const windowSize: Size = useWindowSize();
+  const scrollPosition = useWindowScroll();
   const dispatch = useDispatch();
 
+  // console.log(scrollPosition);
+
   useEffect(() => {
-    console.log(profileData);
     dispatch(setProfileData(profileData));
   }, [profileData]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.innerWidth > 768) {
-        // scrollValue > window.scrollY ? setIsHidden(false) : setIsHidden(true);
-        // setScrollValue(window.scrollY);
-        console.log(window.scrollY);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  });
-
-  useEffect(() => {
-    console.log(scrollContainerRef.current.getBoundingClientRect().top);
-  });
-
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center">
+    <div>
       <Head>
         <title>Justas: Front-end developer</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main
-        className="fixed top-0 left-0 w-full h-screen"
-        ref={scrollContainerRef}
-      >
-        <Parallax pages={4} style={{ top: "0", left: "0" }}>
-          <ScrollableContainer offset={0} scrollSpeed={2.5}>
-            <HelloSection />
-          </ScrollableContainer>
+      <main className="fixed top-0 left-0 w-full h-screen overflow-hidden">
+        <ScrollableContainer>
+          <HelloSection />
+          <HelloSection />
+          <HelloSection />
+        </ScrollableContainer>
 
-          <ParallaxLayer
+        {/* <ParallaxLayer
             offset={1}
-            speed={3}
+            speed={1.5}
             style={{ backgroundColor: "#ff6d6d" }}
-          />
-
-          <ParallaxLayer
-            offset={1}
-            speed={0.5}
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              color: "white",
-            }}
-          >
-            <p>Scroll up</p>
-          </ParallaxLayer>
-        </Parallax>
+          /> */}
       </main>
 
       {/* <footer className="flex h-24 w-full items-center justify-center border-t">
