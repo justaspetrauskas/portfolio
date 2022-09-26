@@ -1,0 +1,22 @@
+/* portable text */
+.greeting-wrapper {
+  @apply text-3xl lg:text-5xl text-left flex flex-col
+  font-semibold text-portfolio_grey_dark lg:leading-[3.5rem]
+   gap-y-[1.5rem] lg:gap-y-[3rem] w-full md:w-8/12 xl:w-5/12;
+  /* animation: 5s ease-in 0s 1 reveal; */
+  /* text-shadow: 2px 2px #ff0000; */
+}
+
+@keyframes reveal {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.action-buttons--row {
+  @apply flex flex-row items-center justify-start gap-x-2 lg:gap-x-4;
+}

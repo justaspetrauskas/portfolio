@@ -1,6 +1,14 @@
 .container {
-  @apply fixed top-0 w-full left-0 z-[99];
+  @apply fixed top-0 w-full left-0 z-[99] 
+  transition-all duration-300
+  ease-[cubic-bezier(.14,.55,.54,1.21)];
   /* bg-portfolio_white */
+}
+
+.hidden-container {
+  @apply -top-full 
+  duration-300
+  ease-[cubic-bezier(.21,-0.36,1,.85)];
 }
 
 .nav-container {
@@ -57,4 +65,67 @@
 
 .navbar-navigation--mobile li:not(:last-child) {
   @apply mb-[1rem];
+}
+
+/* menu items */
+.navigation-item {
+  @apply text-current relative text-center;
+  transform: translateY(-100px);
+}
+.navigation-item-visible {
+  transform: translateY(0px);
+}
+
+.navigation-link {
+  @apply px-0.5 inline-block overflow-hidden align-middle;
+}
+
+.navigation-item:after,
+.navigation-item:before {
+  content: "";
+  position: absolute;
+  bottom: -0.25rem;
+  left: 50%;
+  width: 0%;
+  transform: translateX(-50%);
+  border-radius: 9999px;
+  height: 0.12rem;
+  transition: width 0.6s cubic-bezier(0.5, 0, 0, 1);
+  /* transform 0.5s cubic-bezier(0.5, 0, 0, 1) */
+}
+.navigation-item:hover {
+  @apply text-portfolio_blue transition-all duration-300;
+}
+.navigation-item:after {
+  @apply bg-portfolio_blue;
+  z-index: 99;
+  transition: width 0.6s cubic-bezier(0.5, 0, 0, 1);
+}
+
+.navigation-item:before {
+  @apply bg-portfolio_grey_dark;
+  z-index: 98;
+  transition: width 0.2s cubic-bezier(0.5, 0, 0, 1);
+  /* transform 0.5s cubic-bezier(0.5, 0, 0, 1) */
+}
+
+.navigation-item:hover:after {
+  width: 100%;
+}
+.navigation-item:hover:before {
+  width: 100%;
+}
+.navigation-item--active:before,
+.navigation-item--active:after {
+  content: "";
+  position: absolute;
+  bottom: -0.25rem;
+  left: 50%;
+  width: 100%;
+  transform: translateX(-50%);
+  border-radius: 9999px;
+  height: 0.1rem;
+  background: #dcfdd8;
+  z-index: 99;
+  transition: width 0.6s cubic-bezier(0.5, 0, 0, 1);
 }

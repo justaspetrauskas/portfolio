@@ -8,7 +8,7 @@ module.exports = {
     extend: {
       gridTemplateColumns: {
         navigation: `auto 1fr 3rem auto`,
-        header: "1.5fr 1fr",
+        header: "1fr 2fr",
         mainContent: "1fr 2fr",
         skills: "repeat(auto-fill, minmax(120px, 1fr))",
       },

@@ -1,5 +1,5 @@
 import React from "react";
-import style from "../../styles/container.module.css";
+import style from "./container.module.css";
 
 interface GridContentProps {
   type: "main" | "header";

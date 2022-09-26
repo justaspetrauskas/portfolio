@@ -1,6 +1,6 @@
 import React from "react";
 import { PortableText, PortableTextComponents } from "@portabletext/react";
-import style from "../../styles/aboutMe.module.css";
+import style from "./aboutMe.module.css";
 
 const components: PortableTextComponents = {
   marks: {

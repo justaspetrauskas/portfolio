@@ -18,8 +18,7 @@ export type AppDispatch = typeof store.dispatch;
 export const selectSidebarState = (state: RootState) =>
   state.navigation.sidebarIsOpen;
 
-export const selectActiveLink = (state: RootState) =>
-  state.navigation.activeLink;
+export const selectNavigationSlice = (state: RootState) => state.navigation;
 
 export const selectScrollState = (state: RootState) => state.smoothScroll;
 export const selectSectionState = (state: RootState) => state.sectionState;

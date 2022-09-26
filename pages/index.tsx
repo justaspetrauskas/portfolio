@@ -13,7 +13,6 @@ import ContactSection from "../sections/Contact.Section/Contact.Section";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import ScrollableContainer from "../components/ScrollableContainer/ScrollableContainer";
 
-import { animated, useSpring } from "react-spring";
 import useWindowSize, { Size } from "../hooks/useWindowSize";
 import useWindowScroll from "../hooks/useWindowScroll";
 
@@ -29,6 +28,7 @@ const Home = ({ profileData }: HomeProps) => {
 
   useEffect(() => {
     dispatch(setProfileData(profileData));
+    console.log(profileData);
   }, [profileData]);
 
   return (
@@ -40,9 +40,9 @@ const Home = ({ profileData }: HomeProps) => {
       <Header />
       <main className="fixed top-0 left-0 w-full h-screen overflow-hidden">
         <ScrollableContainer>
-          <HelloSection />
-          <HelloSection />
-          <HelloSection />
+          <HelloSection  />
+          {/* <HelloSection id={"6"} />
+          <HelloSection id={"7"} /> */}
         </ScrollableContainer>
 
         {/* <ParallaxLayer
@@ -69,7 +69,6 @@ const Home = ({ profileData }: HomeProps) => {
 
 export async function getStaticProps() {
   const params = { profileId: process.env.NEXT_PUBLIC_SANITY_PROFILEID };
-
   const query = groq`*[_type == "profile" && _id == $profileId]{
     "hello":greeting,firstName,lastName,currentLocation,socialLinks,
     "profileImageURL":profileImage.asset->url,
@@ -79,8 +78,6 @@ export async function getStaticProps() {
     "aboutMe":aboutMe,
     skills[]->{_id,skillTitle,skillIcon,category,skillIcon{secure_url}}}`;
   const profileData = await sanityClient.fetch(query, params);
-
-  console.log(profileData);
 
   return {
     props: {

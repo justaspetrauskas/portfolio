@@ -1,0 +1,23 @@
+.section-wrapper {
+  @apply w-full h-screen relative;
+}
+/* .section-wrapper:first-of-type {
+  @apply mt-24;
+} */
+.with-parallax {
+}
+
+/* parallax */
+.parallax-background {
+  @apply w-full h-full bg-red-600 absolute top-0 left-0;
+}
+.animate-parallax {
+  transform: translateY(-101%);
+  /* transition: transform 230ms ease-in-out; */
+}
+
+/* content container */
+.container {
+  @apply w-full md:w-[90vw] lg:w-[75vw] mx-auto px-5 h-full
+  flex flex-col items-start justify-center relative;
+}

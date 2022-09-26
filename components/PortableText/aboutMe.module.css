@@ -1,0 +1,36 @@
+.wrapper {
+  @apply w-full float-right relative overflow-hidden;
+}
+
+.wrapper > p {
+  /* @apply -translate-x-1/2; */
+  animation-duration: 3s;
+
+  animation-name: textReveal;
+  animation-iteration-count: 1;
+}
+
+.wrapper > p:not(:last-child) {
+  @apply mb-5 font-normal;
+}
+
+.wrapper > h5 {
+  @apply font-bold py-0.5;
+}
+
+.wrapper > em {
+  @apply text-red-500;
+}
+.wrapper > p > strong {
+  @apply text-portfolio_blue;
+}
+
+@keyframes textReveal {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

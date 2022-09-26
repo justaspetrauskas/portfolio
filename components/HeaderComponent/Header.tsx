@@ -1,47 +1,53 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { selectActiveLink } from "../../redux/store";
 
 // components
 import style from "./header.module.css";
 import Logo from "../LogoContainer/index";
 import ScreenNavigation from "./ScreenNavigation";
+import useWindowScroll from "../../hooks/useWindowScroll";
 
-const links = [
-  { label: "hello", url: "hello" },
-  { label: "me", url: "me" },
-  { label: "projects", url: "projects" },
-  { label: "contact", url: "contact" },
+import { useSpring, animated, config } from "react-spring";
+
+export interface Link {
+  id: number;
+  label: string;
+  url: string;
+}
+
+const links: Link[] = [
+  { label: "hello", url: "hello", id: 1 },
+  { label: "me", url: "me", id: 2 },
+  { label: "projects", url: "projects", id: 3 },
+  { label: "contact", url: "contact", id: 4 },
 ];
 
 const Header = () => {
-  const activeSection = useSelector(selectActiveLink);
+  // const activeSection = useSelector(selectActiveLink);
   const headerRef = useRef<HTMLDivElement | null>(null);
-  const [scrollValue, setScrollValue] = useState(0);
+  const scrollY = useWindowScroll();
+  const [scrollValue, setScrollValue] = useState(500);
   const [isHidden, setIsHidden] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.innerWidth > 768) {
-        scrollValue > window.scrollY ? setIsHidden(false) : setIsHidden(true);
-        setScrollValue(window.scrollY);
-      }
-    };
+    scrollY >= scrollValue ? setIsHidden(true) : setIsHidden(false);
+    // give some space before hiding heaer
+    if (scrollY >= scrollValue + 20) setScrollValue(scrollY);
+  }, [scrollY]);
 
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  });
+  // Setup animation for nav element
 
   return (
     <header
-      className={`${style["container"]} ${isHidden ? "hidden" : ""}`}
+      className={`${style["container"]} ${
+        isHidden ? style["hidden-container"] : ""
+      }`}
       ref={headerRef}
+      // style={springProps}
     >
       <div className={style["nav-container"]}>
         <Logo />
-        <ScreenNavigation links={links} />
+        <ScreenNavigation links={links} headerIsHidden={isHidden} />
         {/* <Hamburger /> */}
       </div>
       {/* <MobileNavigation links={links} /> */}
