@@ -1,0 +1,38 @@
+.section-header {
+  @apply w-full inline text-5xl 
+  font-extrabold py-6 text-portfolio_blue;
+}
+.section-header--text {
+  @apply w-full uppercase tracking-wider;
+  animation: 1s ease-out 0s 1 slideInFromLeft;
+}
+/* .section-header--text::after {
+  content: "";
+  height: 0.3rem;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+} */
+.section-header--text-decoration {
+  @apply h-[0.3rem] w-full bg-primaryGreen relative;
+}
+
+.center {
+  @apply text-center;
+}
+.left {
+  @apply text-left;
+}
+.right {
+  @apply text-right;
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

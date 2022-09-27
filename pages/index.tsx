@@ -40,7 +40,8 @@ const Home = ({ profileData }: HomeProps) => {
       <Header />
       <main className="fixed top-0 left-0 w-full h-screen overflow-hidden">
         <ScrollableContainer>
-          <HelloSection  />
+          <HelloSection />
+          <AboutSection />
           {/* <HelloSection id={"6"} />
           <HelloSection id={"7"} /> */}
         </ScrollableContainer>

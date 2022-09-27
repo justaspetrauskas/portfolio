@@ -1,0 +1,20 @@
+.pillButton {
+  @apply px-2.5 py-1 bg-portfolio_white text-portfolio_grey_dark
+   text-sm font-medium
+  transition-all duration-300;
+}
+.pillButton:hover {
+  @apply text-portfolio_white bg-portfolio_grey_dark;
+}
+
+.filled {
+  @apply rounded-sm;
+}
+.outlined {
+  @apply border border-portfolio_grey_dark;
+}
+.transparent {
+}
+.active {
+  @apply bg-portfolio_blue text-portfolio_white;
+}

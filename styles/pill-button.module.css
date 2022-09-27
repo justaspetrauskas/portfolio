@@ -1,6 +1,0 @@
-.pillButton {
-  @apply rounded-full border px-4 py-0.5;
-}
-.pillButton:hover {
-  @apply bg-white;
-}

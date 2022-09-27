@@ -31,7 +31,7 @@ const SectionWrapper = ({
 
   return (
     <section
-      className={style["section-wrapper"]}
+      className={`${style["section-wrapper"]} ${style["flex-section"]}`}
       id={`${sectionID.toLocaleLowerCase()}`}
       style={{ background: bgColor ? bgColor : "transparent" }}
       ref={sectionRef}

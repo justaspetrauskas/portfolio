@@ -1,5 +1,5 @@
 import React from "react";
-import style from "../../styles/skillsWrapper.module.css";
+import style from "./skillsWrapper.module.css";
 interface SkillsWrapperProps {
   children: React.ReactNode;
 }

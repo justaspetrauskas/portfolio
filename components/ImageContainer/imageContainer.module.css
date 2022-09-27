@@ -1,0 +1,20 @@
+.image-wrapper {
+  @apply rounded-sm overflow-hidden h-full w-full shadow-lg;
+  animation: 1s ease-out 0s 1 slideInFromLeft;
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.image-wrapper > img {
+  filter: saturate(0.2) brightness(0.9);
+  mix-blend-mode: multiply;
+  object-fit: cover;
+  object-position: bottom;
+}

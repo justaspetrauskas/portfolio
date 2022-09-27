@@ -1,0 +1,7 @@
+.container {
+  @apply flex flex-row flex-nowrap border mb-10
+  rounded-sm border-portfolio_grey_dark shadow-lg;
+}
+.container > button:not(:last-of-type) {
+  @apply border-r border-inherit;
+}

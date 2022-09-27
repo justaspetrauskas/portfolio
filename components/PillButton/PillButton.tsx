@@ -1,14 +1,26 @@
 import React from "react";
-import style from "../../styles/pill-button.module.css";
+import style from "./pill-button.module.css";
 
 interface PillButtonProps {
   title: string;
+  type: "filled" | "transparent" | "outlined";
+  active: boolean;
   clickHandler: () => void;
 }
 
-const PillButton = ({ clickHandler, title }: PillButtonProps) => {
+const PillButton = ({
+  clickHandler,
+  title,
+  type = "transparent",
+  active,
+}: PillButtonProps) => {
   return (
-    <button className={style.pillButton} onClick={clickHandler}>
+    <button
+      className={`${style.pillButton} ${style[type]} ${
+        active ? style.active : ""
+      }`}
+      onClick={clickHandler}
+    >
       {title}
     </button>
   );

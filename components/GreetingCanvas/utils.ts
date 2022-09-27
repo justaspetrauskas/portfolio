@@ -1,7 +1,7 @@
 import colormap from "colormap";
 
 let colors = colormap({
-  colormap: "viridis",
+  colormap: "plasma",
   nshades: 20,
 });
 
@@ -13,6 +13,18 @@ interface IParticle {
 
 function range(min: number, max: number) {
   return Math.floor(Math.random() * (max - min) + min);
+}
+
+function easeInQuad(x: number) {
+  return x * x;
+}
+
+function easeOutQuart(x: number): number {
+  return 1 - Math.pow(1 - x, 4);
+}
+
+function easeInQuint(x: number): number {
+  return x * x * x * x * x;
 }
 
 export class Particle {
@@ -51,7 +63,7 @@ export class Particle {
 
     this.radius = radius;
     this.scale = 1;
-    this.color = colors[0];
+    this.color = colors[2];
     this.minDist = 100;
     this.pushFactor = 0.08;
     this.pullFactor = 0.02;
@@ -90,6 +102,15 @@ export class Particle {
     this.y += this.vy;
   }
 
+  resize = (canvasW: number, canvasH: number) => {
+    let dx, dy, dd;
+    dx = canvasW / 2 - this.x;
+    dy = canvasH / 2 - this.y;
+    dd = Math.sqrt(dx * dx + dy * dy);
+
+    this.scale = Math.abs(this.scale - (dd / 900) * 1);
+  };
+
   draw(context: CanvasRenderingContext2D) {
     context.fillStyle = this.color as string;
     context.beginPath();
@@ -98,7 +119,8 @@ export class Particle {
   }
 }
 
-export function createParticleArr(canvasW: number, canvasH: number) {
+export function createParticleArr(context: CanvasRenderingContext2D) {
+  const { width, height } = context.canvas;
   const numberOfParticles = 12;
   let gapCircle = 4;
   let gapDot = 4;
@@ -109,7 +131,6 @@ export function createParticleArr(canvasW: number, canvasH: number) {
 
   let particles: Particle[] = [];
   for (let i = 0; i < numberOfParticles; i++) {
-    let radius;
     const circumference = Math.PI * 2 * circleRadius;
     // number of particles around the circle
     const numFit = i ? Math.floor(circumference / (fitRadius * 2 + gapDot)) : 1;
@@ -119,13 +140,13 @@ export function createParticleArr(canvasW: number, canvasH: number) {
       const theta = fitSlice * j;
       x = Math.cos(theta) * circleRadius;
       y = Math.sin(theta) * circleRadius;
-      x += canvasW * 0.5;
-      y += canvasH * 0.5;
+      x += width * 0.5;
+      y += height * 0.5;
       let particle = new Particle({ x, y, radius: dotRadius });
       particles.push(particle);
     }
     circleRadius += fitRadius * 2 + gapCircle;
-    dotRadius = (1 - i / numberOfParticles) * fitRadius;
+    dotRadius = (1 - easeInQuad(i / numberOfParticles)) * fitRadius;
   }
   return particles;
 }

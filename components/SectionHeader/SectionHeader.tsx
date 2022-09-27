@@ -1,13 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { selectScrollState } from "../../redux/store";
-import style from "../../styles/sectionHeader.module.css";
+import style from "./sectionHeader.module.css";
 
 interface SectionHeaderProps {
   title: string;
+  position: "center" | "left" | "right";
 }
 
-const SectionHeader = ({ title }: SectionHeaderProps) => {
+const SectionHeader = ({ title, position = "center" }: SectionHeaderProps) => {
   const velocity = useSelector(selectScrollState);
 
   return (
@@ -17,10 +18,10 @@ const SectionHeader = ({ title }: SectionHeaderProps) => {
       //   transform: `translateY(${velocity.velocityVal * 270}px)`,
       // }}
     >
-      <span className={style["section-header--text"]}>
+      <h1 className={`${style["section-header--text"]} ${style[position]}`}>
         {title}
         {/* <span className="section-header--text-decoration" /> */}
-      </span>
+      </h1>
     </div>
   );
 };

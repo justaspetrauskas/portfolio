@@ -1,5 +1,5 @@
 import React from "react";
-import style from "../../styles/imageContainer.module.css";
+import style from "./imageContainer.module.css";
 
 interface ImageWrapperProps {
   imageUrl: string;
