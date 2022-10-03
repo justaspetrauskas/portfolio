@@ -1,0 +1,43 @@
+.burger-wrapper {
+  @apply relative z-[999] w-8
+    md:hidden mr-2 
+    flex flex-col items-center justify-between 
+    cursor-pointer origin-center
+    transition-all duration-500 ease-in-out;
+}
+.burger-layer {
+  @apply block w-full h-[2px] bg-portfolio_blue;
+  border-radius: 9999px;
+  transform-origin: center;
+  transition: all 0.4s ease-in-out;
+}
+.burger-layer:not(:last-child) {
+  @apply mb-[0.3rem];
+}
+
+/* closed burger */
+.burger-closed {
+  @apply ease-in-out;
+}
+.burger-closed span:nth-child(2) {
+  @apply delay-300 translate-x-0;
+
+  /* transform: translateX(-2rem); */
+}
+
+/* active burger */
+.burger-open {
+  @apply delay-300 ease-in-out rotate-45;
+}
+.burger-open span {
+  @apply scale-95;
+}
+.burger-open span:nth-child(1) {
+  @apply translate-y-[0.4rem] rotate-90;
+}
+.burger-open span:nth-child(3) {
+  @apply -translate-y-[0.4rem];
+}
+.burger-open span:nth-child(2) {
+  @apply -translate-x-10 w-0;
+}

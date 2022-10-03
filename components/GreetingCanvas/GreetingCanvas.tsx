@@ -5,7 +5,7 @@ import classes from "./greetingCanvas.module.css";
 import Konva from "konva";
 import { Stage, Layer, Circle } from "react-konva";
 import useWindowSize from "../../hooks/useWindowSize";
-import { createParticleArr, Particle } from "./utils";
+import { createParticleArr, Particle, tryParticleAnimation } from "./utils";
 
 const GreetingCanvas = () => {
   const parentContainerRef = useRef<HTMLDivElement>(null);
@@ -41,7 +41,7 @@ const GreetingCanvas = () => {
         setParticles(particleObjects);
       }
     }
-  }, [canvasSize.height, canvasSize.height]);
+  }, [windowSize, canvasSize.height, canvasSize.height]);
 
   useEffect(() => {
     requestAnimationFrame(renderFrame);
@@ -83,7 +83,8 @@ const GreetingCanvas = () => {
     particles.forEach((particle) => {
       // particle.update(mousePos.x, mousePos.y);
       // particle.resize(canvasSize.width, canvasSize.height);
-      particle.draw(context);
+      // particle.update();
+      // particle.update(context);
     });
   }
 

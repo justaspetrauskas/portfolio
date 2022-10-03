@@ -6,6 +6,7 @@ import GridContent from "../../components/GridContentWrapper/GridContent";
 import SectionHeader from "../../components/SectionHeader/SectionHeader";
 import SectionWrapper from "../../components/SectionWrapper/SectionWrapper";
 import { selectProfileState } from "../../redux/store";
+import SocialLinks from "./SocialLinks";
 
 const ContactSection = () => {
   const profile = useSelector(selectProfileState);
@@ -18,10 +19,11 @@ const ContactSection = () => {
     <SectionWrapper sectionID={"contact"}>
       {profile && (
         <GridContent type="main">
-          <div>
-            <SectionHeader title={"Contact me"} />
+          <div className="flex flex-col items-center justify-between gap-y-4">
+            <SectionHeader title={"Contact me"} position={"center"} />
             {/* socials */}
-            {/* {profile.socialLinks && <ContentRow>{profile.socialLinks.map((link:Record<string,any>)=>())}</ContentRow> } */}
+            <SocialLinks links={profile.socialLinks} />
+            {/* {profile.socialLinks && <ContentRow>{profile.socialLinks.map((link:Record<string,any>)=>(<>))}</ContentRow> } */}
           </div>
 
           <ContactForm />

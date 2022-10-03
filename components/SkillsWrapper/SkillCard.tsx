@@ -1,5 +1,5 @@
 import React from "react";
-import style from "../../styles/skillCard.module.css";
+import style from "./skillCard.module.css";
 
 interface SkillCardProps {
   data: Record<string, any>;

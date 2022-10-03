@@ -8,6 +8,8 @@ import ScreenNavigation from "./ScreenNavigation";
 import useWindowScroll from "../../hooks/useWindowScroll";
 
 import { useSpring, animated, config } from "react-spring";
+import MobileNavigation from "./MobileNavigation";
+import Hamburger from "../Hamburger/Hamburger";
 
 export interface Link {
   id: number;
@@ -48,7 +50,8 @@ const Header = () => {
       <div className={style["nav-container"]}>
         <Logo />
         <ScreenNavigation links={links} headerIsHidden={isHidden} />
-        {/* <Hamburger /> */}
+        <Hamburger />
+        {/* <MobileNavigation links={links} /> */}
       </div>
       {/* <MobileNavigation links={links} /> */}
     </header>

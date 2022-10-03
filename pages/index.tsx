@@ -44,6 +44,7 @@ const Home = ({ profileData }: HomeProps) => {
           <AboutSection />
           {/* <HelloSection id={"6"} />
           <HelloSection id={"7"} /> */}
+          <ContactSection />
         </ScrollableContainer>
 
         {/* <ParallaxLayer

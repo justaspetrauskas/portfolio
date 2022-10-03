@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import Button from "../../components/Button/Button";
 import { selectProfileState } from "../../redux/store";
 import PortableText from "../../components/PortableText/PortableTextComponent";
+import PortfolioLink from "../../components/Link/PortfolioLink";
 
 const Greeting = () => {
   const profile = useSelector(selectProfileState);
@@ -15,13 +16,15 @@ const Greeting = () => {
       <div className={style["greeting-wrapper"]}>
         <PortableText portableText={profile!.hello} />
         <div className={style["action-buttons--row"]}>
-          <Button buttonType="link">
-            <span>Download My CV</span>
-          </Button>
+          <PortfolioLink
+            link={"#contact"}
+            label={"Download CV"}
+            type={"outlined"}
+          />
 
-          <Button buttonType="link" type="filled">
+          {/* <Button buttonType="link" type="filled">
             <span>Say Hi</span>
-          </Button>
+          </Button> */}
         </div>
       </div>
     );

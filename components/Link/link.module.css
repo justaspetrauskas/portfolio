@@ -1,0 +1,14 @@
+.link {
+  @apply px-6 py-2 uppercase text-base cursor-pointer relative overflow-hidden;
+}
+.link-outlined {
+  @apply border rounded-sm border-portfolio_grey_dark bg-portfolio_white
+  transition duration-300;
+}
+.link-primary {
+  @apply bg-portfolio_grey_dark;
+}
+
+.link-outlined:hover {
+  @apply shadow-lg;
+}

@@ -1,3 +1,11 @@
+.button {
+  @apply px-6 py-2 text-base rounded-sm;
+}
+
+.button-outlined {
+  @apply border;
+}
+
 .action-button {
   @apply px-6 py-2 text-xs lg:text-base rounded-xl font-medium uppercase relative overflow-hidden z-10;
   transition: all cubic-bezier(0.5, 0, 0, 1) 500ms;
@@ -57,7 +65,7 @@
 
 .link-button {
   @apply bg-portfolio_white text-base border
-  px-5 py-2 rounded-sm text-portfolio_grey_dark
+   text-portfolio_grey_dark
   border-portfolio_grey_dark cursor-pointer relative
   overflow-hidden transition-all duration-300;
 }

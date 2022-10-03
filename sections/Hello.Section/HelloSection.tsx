@@ -17,7 +17,7 @@ const HelloSection = () => {
   return (
     <SectionWrapper sectionID={"hello"}>
       <Greeting />
-      <GreetingCanvas />
+      {/* <GreetingCanvas /> */}
     </SectionWrapper>
   );
 };
