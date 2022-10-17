@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST={"..\\sections\\Hello.Section\\HelloSection.tsx -> ../../components/GreetingCanvas/GreetingCanvas":{"id":"..\\sections\\Hello.Section\\HelloSection.tsx -> ../../components/GreetingCanvas/GreetingCanvas","files":["static/chunks/components_GreetingCanvas_GreetingCanvas_tsx.js"]}}
+self.__REACT_LOADABLE_MANIFEST={}

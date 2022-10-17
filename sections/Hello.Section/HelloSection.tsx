@@ -6,18 +6,13 @@ import Greeting from "./Greeting";
 
 import GridContent from "../../components/GridContentWrapper/GridContent";
 
-const GreetingCanvas = dynamic(
-  () => import("../../components/GreetingCanvas/GreetingCanvas"),
-  {
-    ssr: false,
-  }
-);
+import Canvas from "../../components/GreetingCanvas/Canvas";
 
 const HelloSection = () => {
   return (
     <SectionWrapper sectionID={"hello"}>
       <Greeting />
-      {/* <GreetingCanvas /> */}
+      <Canvas />
     </SectionWrapper>
   );
 };

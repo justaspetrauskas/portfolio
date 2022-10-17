@@ -33,7 +33,7 @@ const Header = () => {
 
   useEffect(() => {
     scrollY >= scrollValue ? setIsHidden(true) : setIsHidden(false);
-    // give some space before hiding heaer
+    // give some space before hiding the header
     if (scrollY >= scrollValue + 20) setScrollValue(scrollY);
   }, [scrollY]);
 

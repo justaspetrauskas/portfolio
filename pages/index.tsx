@@ -38,14 +38,12 @@ const Home = ({ profileData }: HomeProps) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main className="fixed top-0 left-0 w-full h-screen overflow-hidden">
-        <ScrollableContainer>
-          <HelloSection />
-          <AboutSection />
-          {/* <HelloSection id={"6"} />
+      <main className="relative">
+        <HelloSection />
+        <AboutSection />
+        {/* <HelloSection id={"6"} />
           <HelloSection id={"7"} /> */}
-          <ContactSection />
-        </ScrollableContainer>
+        <ContactSection />
 
         {/* <ParallaxLayer
             offset={1}

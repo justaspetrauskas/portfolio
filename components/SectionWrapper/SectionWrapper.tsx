@@ -21,13 +21,13 @@ const SectionWrapper = ({
   // Call the hook passing in ref and root margin
   // In this case it would only be considered onScreen if more ...
   // ... than 300px of element is visible.
-  const onScreen: boolean = useOnScreen<HTMLDivElement>(sectionRef, "-300px");
+  // const onScreen: boolean = useOnScreen<HTMLDivElement>(sectionRef, "-300px");
 
-  useEffect(() => {
-    if (onScreen) {
-      dispatch(setActiveSection(sectionRef.current.id));
-    }
-  }, [onScreen]);
+  // useEffect(() => {
+  //   if (onScreen) {
+  //     dispatch(setActiveSection(sectionRef.current.id));
+  //   }
+  // }, [onScreen]);
 
   return (
     <section
