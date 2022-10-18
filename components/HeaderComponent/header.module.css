@@ -37,23 +37,31 @@
 /* mobile navigation */
 .mobile {
   @apply fixed top-0 left-0 w-screen h-screen
-  md:hidden
-  
+  bg-portfolio_white
+  transition
+  delay-300
+  flex items-center justify-center
 
 
   overflow-hidden
 
- z-[9999];
+ z-[99];
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.4s;
+  /* md:hidden */
 }
 
-.navbar--mobile-closed {
+.mobile-closed {
   @apply -translate-x-full;
 }
 
-.navbar--mobile-open {
+.mobile-open {
   @apply translate-x-0;
 }
+
+.mobile-container {
+  @apply max-w-sm mx-auto flex flex-col;
+}
+
 .navbar-navigation--mobile {
   @apply grid-flow-row
   auto-rows-max gap-y-14 text-2xl;

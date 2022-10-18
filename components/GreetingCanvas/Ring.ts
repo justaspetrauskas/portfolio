@@ -53,6 +53,7 @@ class Ring {
   }
 
   draw = (startAngle: number, offsetAngle: number) => {
+    
     let amplitude = 15;
     this.ctx.strokeStyle = this.color;
     this.ctx.fillStyle = this.color;

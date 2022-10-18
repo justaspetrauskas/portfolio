@@ -1,9 +1,10 @@
 .burger-wrapper {
   @apply relative z-[999] w-8
-    md:hidden mr-2 
+    mr-2 
     flex flex-col items-center justify-between 
     cursor-pointer origin-center
     transition-all duration-500 ease-in-out;
+  /* md:hidden  */
 }
 .burger-layer {
   @apply block w-full h-[2px] bg-portfolio_blue;

@@ -10,6 +10,7 @@ import useWindowScroll from "../../hooks/useWindowScroll";
 import { useSpring, animated, config } from "react-spring";
 import MobileNavigation from "./MobileNavigation";
 import Hamburger from "../Hamburger/Hamburger";
+import { selectSidebarState } from "../../redux/store";
 
 export interface Link {
   id: number;
@@ -26,6 +27,8 @@ const links: Link[] = [
 
 const Header = () => {
   // const activeSection = useSelector(selectActiveLink);
+
+  const sidebarIsOpen = useSelector(selectSidebarState);
   const headerRef = useRef<HTMLDivElement | null>(null);
   const scrollY = useWindowScroll();
   const [scrollValue, setScrollValue] = useState(500);
@@ -49,9 +52,9 @@ const Header = () => {
     >
       <div className={style["nav-container"]}>
         <Logo />
-        <ScreenNavigation links={links} headerIsHidden={isHidden} />
+        {/* <ScreenNavigation links={links} headerIsHidden={isHidden} /> */}
         <Hamburger />
-        {/* <MobileNavigation links={links} /> */}
+        {sidebarIsOpen && <MobileNavigation links={links} />}
       </div>
       {/* <MobileNavigation links={links} /> */}
     </header>
