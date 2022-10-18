@@ -2,8 +2,7 @@ import React from "react";
 import { useTransition } from "react-spring";
 import NavigationItem from "./NavigationItem";
 import style from "./header.module.css";
-import { Link } from "./Header";
-import { link } from "fs/promises";
+import { Link } from "../../redux/slices/navigationSlice";
 
 interface ScreenNavigationProps {
   links: Link[];

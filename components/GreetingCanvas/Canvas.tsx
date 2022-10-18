@@ -8,10 +8,10 @@ function easeInQuad(x: number) {
 }
 
 const configs = {
-  numberOfRings: 15,
+  numberOfRings: 20,
   gapCircle: 15,
   waveOffset: 5,
-  radius: 150,
+  radius: 50,
 };
 
 interface CanvasSize {
@@ -93,10 +93,10 @@ const Canvas = ({ fps = 30 }: CanvasProps) => {
             let ring = new Ring({
               ctx: context,
               ringNo: i,
-              radius: i * easeInQuad(i / configs.numberOfRings) * 15 + 150,
+              radius: i * 15 + configs.radius,
               initColor: color,
             });
-            console.log(ring.color);
+
             ring.draw(startAngle!, offsetAngle);
           }
 

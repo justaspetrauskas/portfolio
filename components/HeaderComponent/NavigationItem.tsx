@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useSpring, animated } from "react-spring";
 import useWindowScroll from "../../hooks/useWindowScroll";
+import { Link } from "../../redux/slices/navigationSlice";
 import { selectNavigationSlice } from "../../redux/store";
-import { Link } from "./Header";
 
 import classes from "./header.module.css";
 
@@ -32,7 +32,7 @@ const NavigationItem = ({
   // const [, setY] = useSpring(() => ({ y: 0 }));
 
   useEffect(() => {
-    console.log(activeSection);
+    // console.log(activeSection);
     // setIsActiveLink(currentActiveLink === link.url.toLocaleLowerCase());
   }, [activeSection]);
 

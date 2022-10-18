@@ -53,14 +53,13 @@ class Ring {
   }
 
   draw = (startAngle: number, offsetAngle: number) => {
-    
     let amplitude = 15;
     this.ctx.strokeStyle = this.color;
     this.ctx.fillStyle = this.color;
     this.ctx.lineWidth = (1 / this.ringNo) * 2;
 
     // this.ctx.filter = `blur(${this.blurValue}px)`;
-    this.ctx.filter = `drop-shadow(0px 0px 5px ${this.color})`;
+    //this.ctx.filter = `drop-shadow(0px 0px 5px ${this.color})`;
 
     this.ctx.beginPath();
 
@@ -90,7 +89,8 @@ class Ring {
 
     this.ctx.closePath();
     // first=== fill, rest===stroke
-    this.ringNo === 0 ? this.ctx.fill() : this.ctx.stroke();
+    // this.ringNo === 0 ? this.ctx.fill() : this.ctx.fill();
+    this.ctx.fill();
   };
 }
 
