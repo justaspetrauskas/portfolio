@@ -11,15 +11,9 @@ import SkillCard from "../../components/SkillsWrapper/SkillCard";
 import PillButton from "../../components/PillButton/PillButton";
 import ContentRow from "../../components/ContentRow/ContentRow";
 import ButtonGroup from "../../components/ButtonGroup.tsx/ButtonGroup";
-
-const skillCategories = [
-  { title: "All", value: "all" },
-  { title: "Front-end", value: "front-end" },
-  { title: "Back-end", value: "back-end" },
-  { title: "Others", value: "others" },
-  { title: "Graphic Design", value: "graphicDesign" },
-  { title: "Language", value: "language" },
-];
+import Article from "../../components/Article/Article";
+import { useTrail, useTransition } from "react-spring";
+import useOnScreen from "../../hooks/useOnScreen";
 
 const AboutSection = () => {
   const profile = useSelector(selectProfileState);
@@ -29,7 +23,7 @@ const AboutSection = () => {
 
   useEffect(() => {
     if (profile) {
-      console.log(profile!.skills);
+      console.log(profile!);
       setShowingSkills(profile!.skills);
     }
   }, [profile]);
@@ -47,71 +41,13 @@ const AboutSection = () => {
   };
   return (
     <SectionWrapper sectionID={"me"}>
-      {profile && (
-        <div className="min-h-screen">
-          <div className="h-screen flex flex-col items-center justify-center">
-            <div className="flex flex-row gap-4">
-              <div className="flex flex-col">
-                <SectionHeader position="left" title={"About Me"} />
-                <div className="pr-24">
-                  <PortableTextComponent portableText={profile!.aboutMe} />
-                </div>
-              </div>
-
-              <div className="rounded-md overflow-hidden p-15 flex items-center justify-center">
-                <img
-                  src={profile!.profileImageURL}
-                  style={{ width: "80%" }}
-                  className="saturate-50 brightness-40"
-                  alt="profile"
-                  loading="lazy"
-                />
-              </div>
-            </div>
-          </div>
-          <div className="h-screen flex flex-col items-center justify-center">
-            <div className="flex flex-col items-center justify-center relative h-full">
-              <SectionHeader position="center" title={"Skills"} />
-              <ButtonGroup>
-                {skillCategories.map(
-                  (el: Record<string, any>, index: number) => (
-                    <PillButton
-                      key={index}
-                      type={"transparent"}
-                      active={el.value === activeCategory}
-                      title={el.title}
-                      clickHandler={() => filterSkills(el.value)}
-                    />
-                  )
-                )}
-              </ButtonGroup>
-            </div>
-            <SkillsWrapper>
-              {showingSkills.map((el: Record<string, any>) => (
-                <SkillCard data={el} key={el._id} />
-              ))}
-            </SkillsWrapper>
-          </div>
-        </div>
-      )}
-      {/* <div className="flex flex-col justify-center items-center h-full w-full">
-        <SectionHeader title={"Skills"} />
-        <ContentRow>
-          {skillCategories.map((el: Record<string, any>, index: number) => (
-            <PillButton
-              key={index}
-              title={el.title}
-              clickHandler={() => filterSkills(el.value)}
-            />
+      <SectionHeader position="left" title={"About Me"} />
+      <div className="relative w-full">
+        {profile &&
+          profile!.aboutMe.map((item: any, index: number) => (
+            <Article article={item} index={index} key={index} />
           ))}
-        </ContentRow>
-      </div> */}
-
-      {/* <SkillsWrapper>
-            {showingSkills.map((el: Record<string, any>) => (
-              <SkillCard data={el} key={el._id} />
-            ))}
-          </SkillsWrapper> */}
+      </div>
     </SectionWrapper>
   );
 };

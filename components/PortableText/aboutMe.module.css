@@ -1,9 +1,9 @@
 .wrapper {
-  @apply w-full float-right relative overflow-hidden;
+  @apply w-full float-right relative overflow-hidden max-w-[36rem];
 }
 
 .wrapper > p {
-  /* @apply -translate-x-1/2; */
+  @apply my-2;
   animation-duration: 3s;
 
   animation-name: textReveal;

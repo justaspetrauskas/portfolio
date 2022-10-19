@@ -47,37 +47,6 @@ const MobileNavigation = ({ links }: MobileNavigationProps) => {
     },
   });
 
-  // const springs = useSprings(
-  //   links.length,
-  //   links.map((item, i) => ({
-  //     ref: springsRef,
-  //     item,
-  //     delay: sidebarIsOpen
-  //       ? (i + 1) * delayValue
-  //       : links.length * delayValue - (i + 1) * delayValue,
-  //     opacity: sidebarIsOpen ? 1 : 0,
-  //     x: sidebarIsOpen ? "0%" : "100%",
-  //     from: {
-  //       opacity: 0,
-  //       x: "-100%",
-  //     },
-  //   }))
-  // );
-
-  // {springs.map(({ x, ...props }, index) => (
-  //   <animated.a
-  //     className={`${classes["nav-item"]}`}
-  //     href={`#${links[index].url}`}
-  //     key={index}
-  //     style={{
-  //       transform: x.to((x) => `translateX(${x})`),
-  //       ...props,
-  //     }}
-  //   >
-  //     {links[index].label}
-  //   </animated.a>
-  // ))}
-
   useChain(sidebarIsOpen ? [springApi, springsRef] : [springsRef, springApi]);
 
   return (

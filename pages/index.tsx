@@ -15,6 +15,7 @@ import ScrollableContainer from "../components/ScrollableContainer/ScrollableCon
 
 import useWindowSize, { Size } from "../hooks/useWindowSize";
 import useWindowScroll from "../hooks/useWindowScroll";
+import SkillsSection from "../sections/Skills.Section/SkillsSection";
 
 interface HomeProps {
   profileData: any;
@@ -28,7 +29,6 @@ const Home = ({ profileData }: HomeProps) => {
 
   useEffect(() => {
     dispatch(setProfileData(profileData));
-    console.log(profileData);
   }, [profileData]);
 
   return (
@@ -41,6 +41,7 @@ const Home = ({ profileData }: HomeProps) => {
       <main className="relative">
         <HelloSection />
         <AboutSection />
+        <SkillsSection />
         {/* <HelloSection id={"6"} />
           <HelloSection id={"7"} /> */}
         <ContactSection />
@@ -75,7 +76,7 @@ export async function getStaticProps() {
     "cvURL":cv.asset->url,education[]->{title,description,university},
     experience[]->{jobTitle,company,description,startDate,endDate,tag[]->{skillTitle}},
     education[]->{title,description,university,startDate,endDate},
-    "aboutMe":aboutMe,
+    aboutMe[]->{title,text,textIcon{secure_url}},
     skills[]->{_id,skillTitle,skillIcon,category,skillIcon{secure_url}}}`;
   const profileData = await sanityClient.fetch(query, params);
 

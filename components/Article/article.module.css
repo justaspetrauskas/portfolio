@@ -1,0 +1,17 @@
+.container {
+  @apply flex flex-row items-center gap-x-12 my-12;
+}
+.container:nth-of-type(even) {
+  @apply md:justify-end;
+}
+
+.image {
+  @apply max-w-[12rem] w-full;
+}
+.body {
+  @apply flex flex-col;
+}
+
+.body > h1 {
+  @apply text-4xl text-portfolio_blue font-bold;
+}

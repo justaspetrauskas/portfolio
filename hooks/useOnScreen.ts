@@ -2,7 +2,7 @@ import React, { MutableRefObject, useEffect, useState } from "react";
 
 // Hook
 export default function useOnScreen<T extends Element>(
-  ref: MutableRefObject<T>,
+  ref: MutableRefObject<HTMLDivElement> | null,
   rootMargin: string = "0px"
 ): boolean {
   // State and setter for storing whether element is visible
@@ -17,11 +17,11 @@ export default function useOnScreen<T extends Element>(
         rootMargin,
       }
     );
-    if (ref.current) {
+    if (ref && ref.current) {
       observer.observe(ref.current);
     }
     return () => {
-      observer.unobserve(ref.current);
+      observer.unobserve(ref!.current);
     };
   }, []); // Empty array ensures that effect is only run on mount and unmount
   return isIntersecting;

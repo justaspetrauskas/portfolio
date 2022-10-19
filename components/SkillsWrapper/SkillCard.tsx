@@ -1,13 +1,15 @@
 import React from "react";
-import style from "./skillCard.module.css";
+import classes from "./skillCard.module.css";
+import { animated } from "react-spring";
 
 interface SkillCardProps {
   data: Record<string, any>;
+  style: Record<string, any>;
 }
-const SkillCard = ({ data }: SkillCardProps) => {
+const SkillCard = ({ data, style }: SkillCardProps) => {
   return (
-    <div className={style["skillCard-wrapper"]}>
-      <div className={style["skillCard-image-wrapper"]}>
+    <animated.div className={classes["wrapper"]} style={style}>
+      <div className={classes["image-wrapper"]}>
         <img
           src={data.skillIcon.secure_url}
           alt={data.skillTitle}
@@ -15,7 +17,7 @@ const SkillCard = ({ data }: SkillCardProps) => {
         />
       </div>
       <span>{data.skillTitle}</span>
-    </div>
+    </animated.div>
   );
 };
 

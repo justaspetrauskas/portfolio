@@ -9,26 +9,15 @@ interface SectionWrapperProps {
   children?: React.ReactNode;
   sectionID: string;
   bgColor?: string;
+  sectionRef?: any;
 }
 
 const SectionWrapper = ({
   children,
   sectionID,
   bgColor,
+  sectionRef,
 }: SectionWrapperProps) => {
-  const dispatch = useDispatch();
-  const sectionRef: any = useRef<HTMLDivElement>();
-  // Call the hook passing in ref and root margin
-  // In this case it would only be considered onScreen if more ...
-  // ... than 300px of element is visible.
-  // const onScreen: boolean = useOnScreen<HTMLDivElement>(sectionRef, "-300px");
-
-  // useEffect(() => {
-  //   if (onScreen) {
-  //     dispatch(setActiveSection(sectionRef.current.id));
-  //   }
-  // }, [onScreen]);
-
   return (
     <section
       className={`${style["section-wrapper"]} ${style["flex-section"]}`}
