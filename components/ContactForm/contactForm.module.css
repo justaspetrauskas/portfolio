@@ -1,0 +1,52 @@
+.contactWrapper {
+  @apply relative flex flex-col 
+  items-center
+  w-full md:w-[70%] sm:w-[90%] md:max-w-[48rem];
+}
+
+.group {
+  @apply w-full flex flex-col relative;
+}
+.group:not(:last-of-type) {
+  @apply mb-8;
+}
+.input--label {
+  @apply relative text-base font-normal mb-1 capitalize;
+}
+.input--field {
+  @apply py-2 w-full px-3 text-lg focus:outline-none border-b border-portfolio_grey_dark 
+   focus:border-portfolio_blue
+   focus:placeholder:text-transparent
+
+  invalid:border-pink-500 invalid:text-pink-600
+  focus:invalid:border-pink-500 focus:invalid:ring-pink-500;
+}
+.input--field.error {
+  @apply border-portfolio_error placeholder:text-portfolio_error;
+}
+.error-msg {
+  @apply text-portfolio_error text-sm;
+}
+
+.submit {
+  @apply mt-0 sm:mt-12 uppercase relative overflow-hidden 
+  tracking-wide text-base font-medium
+  justify-center
+  inline-flex max-w-[12rem];
+}
+.submit-content {
+  @apply flex items-center px-10 py-3 border
+   border-portfolio_grey_dark w-full justify-center
+  rounded-sm;
+}
+/* .input--field {
+  @apply block;
+} */
+
+/* .input--required::after {
+  content: "*";
+  position: absolute;
+  color: red;
+  rigt: 0;
+  top: 0;
+} */

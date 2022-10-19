@@ -4,7 +4,7 @@ import { ContactFormFields } from "../../types/types.contact";
 import Button from "../Button/Button";
 import InputField from "./InputField";
 
-import style from "../../styles/contactForm.module.css";
+import style from "./contactForm.module.css";
 import ContentRow from "../ContentRow/ContentRow";
 
 const validation = {
@@ -43,7 +43,7 @@ const ContactForm = () => {
         formfield={"fullName"}
         placeholderText={"your name"}
         registerField={register}
-        validationRules={{ required: true, maxLength: 8 }}
+        validationRules={{ required: true, maxLength: 50 }}
         errorMessage={errors}
       />
       <InputField
@@ -67,11 +67,9 @@ const ContactForm = () => {
         errorMessage={errors}
       />
 
-      <ContentRow>
-        <Button type={"outlined"} buttonType={"submit"}>
-          submit
-        </Button>
-      </ContentRow>
+      <button className={`${style["submit"]}`} type="submit">
+        <div className={`${style["submit-content"]}`}>Send</div>
+      </button>
     </form>
   );
 };

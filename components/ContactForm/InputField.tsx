@@ -2,7 +2,7 @@ import React from "react";
 import { UseFormRegister } from "react-hook-form";
 import { ContactFormFields, ValidationRules } from "../../types/types.contact";
 import ErrorMessage from "./ErrorMessage";
-import style from "../../styles/contactForm.module.css";
+import style from "./contactForm.module.css";
 
 interface InputFieldProps {
   inputType: "textarea" | "text";
@@ -26,7 +26,7 @@ const InputField = ({
   errorMessage,
 }: InputFieldProps) => {
   return (
-    <div className={style["input-wrapper"]}>
+    <div className={style["group"]}>
       <label
         className={`${style["input--label"]} ${
           required === true && style["input--required"]
@@ -35,11 +35,13 @@ const InputField = ({
         {label}
       </label>
       {inputType === "text" && (
-        <div className="flex flex-col gap-y-1">
+        <div>
           <input
             type="text"
             id={`inputfield--${label}`}
-            className={style["input--field"]}
+            className={`${style["input--field"]} ${
+              errorMessage[formfield] ? style["error"] : ""
+            }`}
             placeholder={placeholderText}
             {...registerField(formfield, validationRules)}
             data-form-type={label}
@@ -50,12 +52,12 @@ const InputField = ({
         </div>
       )}
       {inputType === "textarea" && (
-        <div className="flex flex-col gap-y-1">
+        <div>
           <textarea
             className={[style["input--field"], style["input--textArea"]].join(
               " "
             )}
-            rows={4}
+            rows={1}
             placeholder={placeholderText}
             {...registerField(formfield, validationRules)}
           />

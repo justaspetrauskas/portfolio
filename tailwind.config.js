@@ -22,10 +22,11 @@ module.exports = {
         primaryGreen: "#1A422A",
         secondaryGreen: "#DCFDD8",
         primaryPink: "#e5bdd5",
+        portfolio_error: "#d1132f",
         portfolio_white: "#FEFEFE",
-        portfolio_grey_dark: "#0C0F0F",
+        portfolio_grey_dark: "#292724",
         portfolio_grey_light: "#282828",
-        portfolio_blue: "#502CE3",
+        portfolio_blue: "#493ADB",
       },
       transitionTimingFunction: {
         buttonHover: "cubic-bezier(0.5, 0, 0, 1)",
