@@ -34,10 +34,14 @@
   justify-center
   inline-flex max-w-[12rem];
 }
+
 .submit-content {
   @apply flex items-center px-10 py-3 border
    border-portfolio_grey_dark w-full justify-center
   rounded-sm;
+}
+.submit:disabled > .submit-content {
+  @apply border-portfolio_grey_light/30 text-portfolio_grey_light/30;
 }
 /* .input--field {
   @apply block;

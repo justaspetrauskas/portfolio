@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ContactFormFields } from "../../types/types.contact";
-import Button from "../Button/Button";
 import InputField from "./InputField";
 
 import style from "./contactForm.module.css";
@@ -14,6 +13,7 @@ const validation = {
 const ContactForm = () => {
   const {
     register,
+    getValues,
     formState: { errors },
     handleSubmit,
   } = useForm<ContactFormFields>({
@@ -21,16 +21,21 @@ const ContactForm = () => {
     reValidateMode: "onChange",
   });
 
-  const onSubmit = async (values: ContactFormFields) => {
-    const res = await fetch("/api/send", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    });
+  useEffect(() => {
+    const values = getValues();
+    console.log(values);
+  }, [getValues]);
 
-    console.log(res.status);
+  const onSubmit = async (values: ContactFormFields) => {
+    // const res = await fetch("/api/send", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(values),
+    // });
+    const formValues = getValues();
+    console.log(formValues);
     // handleResponse(res.status);
   };
 
@@ -67,7 +72,7 @@ const ContactForm = () => {
         errorMessage={errors}
       />
 
-      <button className={`${style["submit"]}`} type="submit">
+      <button className={`${style["submit"]}`} type="submit" disabled={false}>
         <div className={`${style["submit-content"]}`}>Send</div>
       </button>
     </form>
