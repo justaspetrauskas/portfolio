@@ -1,14 +1,26 @@
-.link {
-  @apply px-6 py-2 uppercase text-base cursor-pointer relative overflow-hidden;
-}
-.link-outlined {
-  @apply border rounded-sm border-portfolio_grey_dark bg-portfolio_white
+.btn {
+  @apply inline-flex shrink-0 cursor-pointer select-none
+  flex-nowrap items-center justify-center relative overflow-hidden
+  uppercase rounded-sm tracking-wide
+  px-4 xl:px-5 
+  py-2 xl:py-3
+  text-xs sm:text-sm xl:text-base font-medium
   transition duration-300;
 }
-.link-primary {
-  @apply bg-portfolio_grey_dark;
+
+.link-outlined {
+  @apply border  border-portfolio_grey_dark bg-portfolio_white;
+}
+.link-filled {
+  @apply bg-portfolio_blue text-portfolio_white;
 }
 
-.link-outlined:hover {
-  @apply shadow-lg;
+.link-outlined:hover,
+.link-outlined:focus {
+  @apply shadow-[0_0_1.4rem_0.4rem_rgba(0,0,0,0.3)] shadow-portfolio_grey_dark/20;
+}
+
+.link-filled:hover,
+.link-filled:focus {
+  @apply shadow-[0_0_1.4rem_0.4rem_rgba(0,0,0,0.3)] shadow-portfolio_blue/30;
 }

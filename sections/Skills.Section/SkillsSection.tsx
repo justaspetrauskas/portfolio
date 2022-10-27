@@ -5,10 +5,12 @@ import ButtonGroup from "../../components/ButtonGroup.tsx/ButtonGroup";
 import PillButton from "../../components/PillButton/PillButton";
 import SectionHeader from "../../components/SectionHeader/SectionHeader";
 import SectionWrapper from "../../components/SectionWrapper/SectionWrapper";
+import SkillSelector from "../../components/SkillSelector/SkillSelector";
 import SkillCard from "../../components/SkillsWrapper/SkillCard";
 import SkillsWrapper from "../../components/SkillsWrapper/SkillsWrapper";
 import useOnScreen from "../../hooks/useOnScreen";
 import { selectNavigationSlice, selectProfileState } from "../../redux/store";
+import { Skill } from "../../types/types.profile";
 const skillCategories = [
   { title: "All", value: "all" },
   { title: "Front-end", value: "front-end" },
@@ -22,10 +24,10 @@ const SkillsSection = () => {
   const profile = useSelector(selectProfileState);
   const { activeSection } = useSelector(selectNavigationSlice);
 
-  const [showingSkills, setShowingSkills] = useState<Record<string, any>[]>([]);
+  const [showingSkills, setShowingSkills] = useState<Skill[]>([]);
   const [activeCategory, setActiveCategory] = useState("all");
 
-  const [sectionOnScreen, setOnScreen] = useState(false);
+  const [sectionOnScreen, setOnScreen] = useState(true);
 
   const dispatch = useDispatch();
   // const sectionRef: any = useRef<HTMLDivElement>(null);
@@ -33,19 +35,19 @@ const SkillsSection = () => {
   // Call the hook passing in ref and root margin
   // In this case it would only be considered onScreen if more ...
   // ... than 300px of element is visible.
-  const onScreen: boolean = useOnScreen<HTMLDivElement>(skillsRef, "-300px");
 
-  useEffect(() => {
-    if (onScreen) {
-      // dispatch(setActiveSection(sectionRef.current.id));
-      setOnScreen(true);
-    } else {
-      setOnScreen(false);
-    }
-  }, [onScreen]);
+  // useEffect(() => {
+  //   if (onScreen) {
+  //     // dispatch(setActiveSection(sectionRef.current.id));
+  //     setOnScreen(true);
+  //   } else {
+  //     setOnScreen(false);
+  //   }
+  // }, [onScreen]);
 
   useEffect(() => {
     if (profile) {
+      console.log(profile);
       setShowingSkills(profile!.skills);
     }
   }, [profile]);
@@ -70,7 +72,7 @@ const SkillsSection = () => {
     // }
   };
   return (
-    <SectionWrapper sectionID={"skills"} sectionRef={skillsRef}>
+    <SectionWrapper sectionID={"skills"}>
       <SectionHeader position="left" title={"Skills"} />
       <ButtonGroup>
         {skillCategories.map((el: Record<string, any>, index: number) => (
@@ -83,9 +85,10 @@ const SkillsSection = () => {
           />
         ))}
       </ButtonGroup>
+      <SkillSelector options={skillCategories} />
       <SkillsWrapper>
         {skills((style, item) => (
-          <SkillCard data={item} key={item._id} style={style} />
+          <SkillCard data={item} key={item._id.split("-")[1]} style={style} />
         ))}
       </SkillsWrapper>
     </SectionWrapper>

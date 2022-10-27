@@ -14,18 +14,22 @@ function easeOutQuint(x: number): number {
 
 interface Ring {
   ctx: CanvasRenderingContext2D;
-  centerX: number;
-  centerY: number;
+  x: number;
+  y: number;
   radius: number;
   waveFrequency: number;
   maxWaveAmplitude: number;
   color: string;
   ringNo: number;
   scale: number;
+  radians: number;
+  velocity: number;
 }
 
 interface IBlob {
   ctx: CanvasRenderingContext2D | null;
+  x: number;
+  y: number;
   ringNo: number;
   radius: number;
   initColor?: string;
@@ -40,16 +44,18 @@ const ringCfg = {
 };
 
 class Ring {
-  constructor({ ctx, ringNo, radius, initColor }: IBlob) {
+  constructor({ ctx, x, y, ringNo, radius, initColor }: IBlob) {
     this.ctx = ctx!;
-    this.centerX = this.ctx.canvas.width / 2;
-    this.centerY = this.ctx.canvas.height / 2;
+    this.x = x;
+    this.y = y;
     this.radius = radius;
     this.color = initColor || "#dcfdd8";
     this.waveFrequency = ringCfg.waveFrequency;
     this.maxWaveAmplitude = ringCfg.maxWaveAmplitude; // how high are the waves
     this.ringNo = ringNo;
     this.scale = 1;
+    this.radians = 0;
+    this.velocity = 0.05;
   }
 
   draw = (startAngle: number, offsetAngle: number) => {
@@ -58,12 +64,8 @@ class Ring {
     this.ctx.fillStyle = this.color;
     this.ctx.lineWidth = (1 / this.ringNo) * 2;
 
-    // this.ctx.filter = `blur(${this.blurValue}px)`;
-    //this.ctx.filter = `drop-shadow(0px 0px 5px ${this.color})`;
-
     this.ctx.beginPath();
 
-    // this.ctx.moveTo(this.centerX + this.radius, this.centerY);
     for (let j = -180; j < 180; j++) {
       let currentAngle = ((j + startAngle) * Math.PI) / 180;
       let displacement = 0; // 0 to 1 variantions
@@ -82,8 +84,8 @@ class Ring {
       }
       let waveAmplitude = this.radius + displacement * waveValue;
 
-      let x = this.centerX + Math.cos(currentAngle) * waveAmplitude; //return values from -1 to 1 200 = r
-      let y = this.centerY + Math.sin(currentAngle) * waveAmplitude;
+      let x = this.x + Math.cos(currentAngle) * waveAmplitude; //return values from -1 to 1 200 = r
+      let y = this.y + Math.sin(currentAngle) * waveAmplitude;
       j > -180 ? this.ctx.lineTo(x, y) : this.ctx.moveTo(x, y);
     }
 

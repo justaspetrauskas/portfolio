@@ -22,6 +22,6 @@
 
 /* content container */
 .container {
-  @apply w-full md:w-[90vw] lg:w-[75vw] mx-auto px-5 h-full
-  flex flex-col items-start justify-center;
+  @apply w-full md:w-[90vw] lg:w-[75vw] mx-auto px-8 h-full
+  flex flex-col items-start justify-center gap-y-8 xl:gap-y-12;
 }

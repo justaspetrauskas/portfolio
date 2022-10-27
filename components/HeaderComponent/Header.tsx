@@ -19,13 +19,17 @@ const Header = () => {
   const { links } = useSelector(selectNavigationSlice);
   const headerRef = useRef<HTMLDivElement | null>(null);
   const scrollY = useWindowScroll();
-  const [scrollValue, setScrollValue] = useState(500);
-  const [isHidden, setIsHidden] = useState(false);
+  const [scrollValue, setScrollValue] = useState(scrollY);
+  const [isHidden, setIsHidden] = useState(true);
 
   useEffect(() => {
-    scrollY >= scrollValue ? setIsHidden(true) : setIsHidden(false);
-    // give some space before hiding the header
-    // if (scrollY >= scrollValue + 20) setScrollValue(scrollY);
+    setIsHidden(scrollValue > scrollY);
+    setScrollValue(scrollY);
+
+    if (scrollY === 0) {
+      setIsHidden(false);
+      setScrollValue(scrollY);
+    }
   }, [scrollY]);
 
   // Setup animation for nav element
@@ -40,7 +44,7 @@ const Header = () => {
     >
       <div className={style["nav-container"]}>
         <Logo />
-        {/* <ScreenNavigation links={links} headerIsHidden={isHidden} /> */}
+        <ScreenNavigation links={links} headerIsHidden={isHidden} />
 
         <MobileNavigation links={links} />
       </div>

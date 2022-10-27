@@ -32,8 +32,11 @@ const NavigationItem = ({
   // const [, setY] = useSpring(() => ({ y: 0 }));
 
   useEffect(() => {
-    // console.log(activeSection);
-    // setIsActiveLink(currentActiveLink === link.url.toLocaleLowerCase());
+    if (link.url.toLocaleLowerCase() === activeSection) {
+      setIsActiveLink(true);
+    } else {
+      setIsActiveLink(false);
+    }
   }, [activeSection]);
 
   const handleClickNav = () => {
@@ -46,7 +49,7 @@ const NavigationItem = ({
   return (
     <animated.li
       className={`${classes["navigation-item"]}  ${
-        isActiveLink ? style["navigation-item--active"] : ""
+        isActiveLink ? classes["navigation-item--active"] : ""
       }`}
       style={style}
     >

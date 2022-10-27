@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { PortableText, PortableTextComponents } from "@portabletext/react";
 import style from "./aboutMe.module.css";
+import { RichText } from "../../types/types.profile";
 
 const components: PortableTextComponents = {
   marks: {
@@ -18,12 +19,16 @@ const components: PortableTextComponents = {
 };
 
 interface PortableTextComponentProps {
-  portableText: any;
+  portableText: RichText[];
 }
 
 const PortableTextComponent = ({
   portableText,
 }: PortableTextComponentProps) => {
+  // useEffect(() => {
+  //   console.log(portableText);
+  // }, [portableText]);
+
   return (
     <div className={style["wrapper"]}>
       <PortableText value={portableText} components={components} />

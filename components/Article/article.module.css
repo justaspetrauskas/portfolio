@@ -1,17 +1,24 @@
 .container {
-  @apply flex flex-row items-center gap-x-12 my-12;
+  @apply flex flex-col md:flex-row 
+  items-center gap-y-4 md:gap-x-12 my-8 lg:my-4 xl:my-6 2xl:my-12 relative;
 }
+
+.container:first-of-type {
+  @apply mt-6;
+}
+
 .container:nth-of-type(even) {
   @apply md:justify-end;
 }
 
 .image {
-  @apply max-w-[12rem] w-full;
+  @apply max-w-[5rem] sm:max-w-[6rem] xl:max-w-[8rem] 2xl:max-w-[12rem] 
+  w-full;
 }
 .body {
-  @apply flex flex-col;
+  @apply flex flex-col text-sm xl:text-base;
 }
 
 .body > h1 {
-  @apply text-4xl text-portfolio_blue font-bold;
+  @apply text-3xl sm:text-4xl text-portfolio_blue font-bold;
 }

@@ -1,10 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ContactFormFields } from "../../types/types.contact";
 import InputField from "./InputField";
 
+import emailjs from "@emailjs/browser";
+
 import style from "./contactForm.module.css";
 import ContentRow from "../ContentRow/ContentRow";
+import SubmitButton from "../SubmitButton/SubmitButton";
+import { emailJS } from "../../config";
 
 const validation = {
   email: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i,
@@ -14,29 +18,31 @@ const ContactForm = () => {
   const {
     register,
     getValues,
-    formState: { errors },
+    formState: { errors, isDirty, isValid, touchedFields },
     handleSubmit,
   } = useForm<ContactFormFields>({
     mode: "onChange", // "onChange"
     reValidateMode: "onChange",
   });
 
-  useEffect(() => {
-    const values = getValues();
-    console.log(values);
-  }, [getValues]);
+  const [messageStatus, setMessageStatus] = useState<"IDLE" | "SENT" | "ERROR">(
+    "IDLE"
+  );
 
-  const onSubmit = async (values: ContactFormFields) => {
-    // const res = await fetch("/api/send", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(values),
-    // });
-    const formValues = getValues();
-    console.log(formValues);
-    // handleResponse(res.status);
+  const onSubmit = async () => {
+    const formValues = getValues() as Record<string, any>;
+    const { serviceId, templateId, publicKey } = emailJS;
+
+    emailjs.send(serviceId, templateId, formValues, publicKey).then(
+      (response) => {
+        console.log("SUCCESS!", response.status, response.text);
+        setMessageStatus("SENT");
+      },
+      (err) => {
+        console.log("FAILED...", err);
+        setMessageStatus("ERROR");
+      }
+    );
   };
 
   return (
@@ -71,10 +77,10 @@ const ContactForm = () => {
         validationRules={{ required: true }}
         errorMessage={errors}
       />
-
-      <button className={`${style["submit"]}`} type="submit" disabled={false}>
-        <div className={`${style["submit-content"]}`}>Send</div>
-      </button>
+      <SubmitButton
+        disabled={!isDirty || !isValid}
+        messageStatus={messageStatus}
+      />
     </form>
   );
 };

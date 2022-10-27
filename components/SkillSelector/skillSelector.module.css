@@ -1,0 +1,6 @@
+.container {
+  @apply mx-auto w-[45vw] border border-portfolio_grey_dark rounded-sm sm:hidden;
+}
+.container:focus {
+  @apply border-portfolio_grey_dark outline-none;
+}

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, MutableRefObject } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useOnScreen from "../../hooks/useOnScreen";
 import { setActiveSection } from "../../redux/slices/navigationSlice";
@@ -16,8 +16,18 @@ const SectionWrapper = ({
   children,
   sectionID,
   bgColor,
-  sectionRef,
 }: SectionWrapperProps) => {
+  const dispatch = useDispatch();
+  const sectionRef = useRef<any>(null);
+  const { sectionId, isIntersecting } = useOnScreen(sectionRef, "-300px");
+
+  useEffect(() => {
+    if (isIntersecting) {
+      // createglobalState
+      dispatch(setActiveSection(sectionId));
+      console.log("Active Section", sectionId);
+    }
+  }, [isIntersecting]);
   return (
     <section
       className={`${style["section-wrapper"]} ${style["flex-section"]}`}

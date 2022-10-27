@@ -1,5 +1,5 @@
 .container {
-  @apply flex flex-row flex-nowrap border mb-10
+  @apply hidden sm:flex flex-row flex-nowrap border mb-10
   rounded-sm border-portfolio_grey_dark shadow-lg;
 }
 .container > button:not(:last-of-type) {

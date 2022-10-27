@@ -1,8 +1,12 @@
 /* portable text */
 .greeting-wrapper {
-  @apply text-3xl lg:text-5xl text-left flex flex-col
-  font-semibold text-portfolio_grey_dark lg:leading-[3.5rem]
-   gap-y-[1.5rem] lg:gap-y-[3rem] w-full md:w-8/12 xl:w-5/12;
+  @apply text-2xl xs:text-xl md:text-3xl lg:text-2xl xl:text-3xl
+  
+  lg:leading-[2.2rem]
+  
+  text-left flex flex-col
+  font-semibold text-portfolio_grey_dark 
+   gap-y-[1.5rem] xl:gap-y-[3rem] w-full md:w-8/12 xl:w-5/12;
   /* animation: 5s ease-in 0s 1 reveal; */
   /* text-shadow: 2px 2px #ff0000; */
 }

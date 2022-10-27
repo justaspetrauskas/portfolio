@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import useWindowSize from "../../hooks/useWindowSize";
 import classes from "./greetingCanvas.module.css";
 
 import Ring from "./Ring";
@@ -11,7 +12,7 @@ const configs = {
   numberOfRings: 20,
   gapCircle: 15,
   waveOffset: 5,
-  radius: 50,
+  radius: 25,
 };
 
 interface CanvasSize {
@@ -24,13 +25,30 @@ interface CanvasProps {
 }
 
 const Canvas = ({ fps = 30 }: CanvasProps) => {
+  const windowSize = useWindowSize();
   const parentContainerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [context, setContext] = useState<CanvasRenderingContext2D | null>(null);
+  const [scaleRatio, setScaleRatio] = useState<number>(1);
   const [canvasSize, setCanvasSize] = useState<CanvasSize>({
     width: null,
     height: null,
   });
+
+  useEffect(() => {
+    if (windowSize) {
+      const { width, height } = windowSize;
+      let ratio: number;
+      if (width! > height!) {
+        ratio = +(width! / height!).toFixed(2);
+        setScaleRatio(ratio);
+      }
+      if (height! > width!) {
+        ratio = +(width! / height!).toFixed(2);
+        setScaleRatio(ratio);
+      }
+    }
+  }, [windowSize]);
 
   useEffect(() => {
     if (parentContainerRef.current && canvasRef.current) {
@@ -73,6 +91,13 @@ const Canvas = ({ fps = 30 }: CanvasProps) => {
 
     // Check if null context has been replaced on component mount
     if (context) {
+      // updating the centerX
+      const originX = context.canvas.width / 2;
+      const originY = context.canvas.height / 2;
+      let x = originX;
+      let y = originY;
+      let radians = 0;
+      let velocity = 0.00015;
       const render = () => {
         animationFrameId = window.requestAnimationFrame(render);
         now = Date.now();
@@ -83,17 +108,24 @@ const Canvas = ({ fps = 30 }: CanvasProps) => {
           then = now - (elapsed % fpsInterval);
           frameCount++;
           context.clearRect(0, 0, canvasSize.width!, canvasSize.height!);
+
+          // creating ring and drawing
           for (let i = 0; i < configs.numberOfRings; i++) {
+            radians += (velocity * i) / 10;
+            x = originX + Math.cos(radians) * 50 * (i / 10);
+            y = originY + Math.sin(radians) * 50 * (i / 10);
+
             let offsetAngle = (i * configs.waveOffset * Math.PI) / 180;
-            circleRadius += fitRadius * 2 + gapCircle;
-            dotRadius = (1 + easeInQuad(i / configs.numberOfRings)) * fitRadius;
+
             let colorAlpha = 1 - i / configs.numberOfRings;
             let color = `rgba(80, 44, 227,${colorAlpha})`;
 
             let ring = new Ring({
               ctx: context,
+              x: x,
+              y: y,
               ringNo: i,
-              radius: i * 15 + configs.radius,
+              radius: i * 15 + configs.radius * scaleRatio,
               initColor: color,
             });
 

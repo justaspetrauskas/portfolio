@@ -14,17 +14,19 @@ const Greeting = () => {
   if (profile) {
     return (
       <div className={style["greeting-wrapper"]}>
-        <PortableText portableText={profile!.hello} />
+        <PortableText portableText={profile!.greeting} />
         <div className={style["action-buttons--row"]}>
           <PortfolioLink
-            link={"#contact"}
+            link={profile!.cvURL}
             label={"Download CV"}
             type={"outlined"}
           />
 
-          {/* <Button buttonType="link" type="filled">
-            <span>Say Hi</span>
-          </Button> */}
+          <PortfolioLink
+            link={"#contact"}
+            label={"Contact Me"}
+            type={"filled"}
+          />
         </div>
       </div>
     );

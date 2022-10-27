@@ -7,6 +7,7 @@ import Greeting from "./Greeting";
 import GridContent from "../../components/GridContentWrapper/GridContent";
 
 import Canvas from "../../components/GreetingCanvas/Canvas";
+import { RichText } from "../../types/types.profile";
 
 const HelloSection = () => {
   return (

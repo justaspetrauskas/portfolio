@@ -11,7 +11,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
   const content = {
     to: "justbeready@gmail.com",
     from: "petrauskas.justas@gmail.com", // verified email
-    subject: `Contact form - ${email}`,
+    subject: `Message form - ${email}`,
     text: message,
     html: `
       <p>Name: ${fullName}</p>

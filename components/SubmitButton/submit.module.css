@@ -1,0 +1,57 @@
+.submit {
+  @apply mt-0 sm:mt-12 uppercase relative 
+    tracking-wide text-base font-medium 
+    justify-center transition w-48 z-20
+    inline-flex;
+}
+
+.submit-content {
+  @apply flex flex-row gap-x-2 items-center px-10 py-3 border
+     border-portfolio_grey_dark w-full
+     transition
+     justify-center
+    rounded-sm;
+}
+.submit:disabled > .submit-content {
+  @apply border-portfolio_grey_light/30 text-portfolio_grey_light/30;
+}
+
+/* .submit:hover,
+.submit:focus {
+  @apply;
+} */
+
+.submit:hover:not(.submitted, .submit:disabled) .submit-content,
+.submit:focus:not(.submitted, .submit:disabled) .submit-content {
+  @apply text-portfolio_white shadow-btn_hover border-portfolio_blue shadow-portfolio_blue;
+}
+
+.submit.submitted .submit-content {
+  @apply border-portfolio_blue bg-portfolio_blue
+   text-portfolio_white;
+}
+/* .submit.submitted:after {
+  @apply absolute h-full w-full content-[""] 
+  bg-portfolio_blue z-10
+  animate-ping;
+  animation: 1;
+} */
+
+/* .submit-icon {
+  @apply absolute right-0;
+}
+.submit-icon svg {
+  @apply w-10 m-2;
+}
+
+.submit-icon path {
+  @apply stroke-portfolio_blue stroke-[3px];
+
+  stroke-dasharray: 34;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+} */
+
+/* .submitted-content > p {
+  @apply transition duration-1000;
+} */

@@ -1,6 +1,7 @@
 .pillButton {
   @apply px-2.5 py-1 bg-portfolio_white text-portfolio_grey_dark
-   text-sm font-medium
+   text-xs md:text-sm 
+   font-medium
   transition-all duration-300;
 }
 .pillButton:hover {

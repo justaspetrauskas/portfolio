@@ -1,5 +1,5 @@
 .section-header {
-  @apply w-full inline text-5xl 
+  @apply w-full inline text-4xl sm:text-5xl 
   font-extrabold py-6 text-portfolio_blue;
 }
 .section-header--text {

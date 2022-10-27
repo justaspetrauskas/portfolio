@@ -9,8 +9,9 @@ export interface Link {
 const links: Link[] = [
   { label: "hello", url: "hello", id: 1 },
   { label: "me", url: "me", id: 2 },
-  { label: "projects", url: "projects", id: 3 },
-  { label: "contact", url: "contact", id: 4 },
+  { label: "skills", url: "skills", id: 3 },
+  { label: "projects", url: "projects", id: 4 },
+  { label: "contact", url: "contact", id: 5 },
 ];
 
 interface NavigationSlice {
@@ -41,7 +42,7 @@ export const navigationStateSlice = createSlice({
     setActiveSection: (state, action: PayloadAction<string>) => {
       const section = action.payload.toLocaleLowerCase();
 
-      state.activeLink = section;
+      state.activeSection = section;
     },
   },
 });

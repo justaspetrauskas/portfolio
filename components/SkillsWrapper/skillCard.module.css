@@ -14,10 +14,15 @@
 }
 
 .wrapper {
-  @apply w-[5rem] h-[5rem] lg:w-[7rem] lg:h-[7rem]
-    flex flex-col gap-y-2 items-center justify-around m-4
+  @apply w-[3rem] h-[3rem] sm:w-[4rem] sm:h-[4rem] lg:w-[7rem] lg:h-[7rem]
+    flex flex-col gap-y-0 md:gap-y-2  items-center justify-around m-2 xs:m-4 md:m-4
     font-medium text-base leading-5 text-center transition duration-300;
 }
+
+.wrapper > span {
+  @apply text-[0.6rem]  sm:text-xs lg:text-sm;
+}
+
 .wrapper:hover {
   @apply scale-110;
 }

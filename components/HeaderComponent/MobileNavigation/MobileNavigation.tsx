@@ -36,7 +36,7 @@ const MobileNavigation = ({ links }: MobileNavigationProps) => {
   const springApi = useSpringRef();
   const rest = useSpring({
     ref: springApi,
-    config: { mass: 1, tension: 200, friction: 25 },
+    config: { mass: 1, tension: 180, friction: 25 },
     from: {
       transform: "translateX(100%)",
       opacity: 0,

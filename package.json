@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@emailjs/browser": "^3.7.0",
     "@portabletext/react": "^1.0.6",
     "@react-spring/parallax": "^9.5.4",
     "@reduxjs/toolkit": "^1.8.3",

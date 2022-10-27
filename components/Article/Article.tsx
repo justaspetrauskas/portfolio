@@ -1,18 +1,19 @@
 import React from "react";
 import { animated } from "react-spring";
+import { AboutMe } from "../../types/types.profile";
 import PortableTextComponent from "../PortableText/PortableTextComponent";
 import classes from "./article.module.css";
 
 interface ArticleProps {
   index: number;
-  article: Record<string, any>;
+  article: AboutMe;
   style?: Record<string, any>;
 }
 const Article = ({ article, index }: ArticleProps) => {
   return (
     <animated.article className={`${classes.container}`}>
       <img
-        src={article.textIcon.secure_url}
+        src={article.iconUrl}
         className={classes.image}
         alt="article-image"
         loading="lazy"

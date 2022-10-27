@@ -35,7 +35,7 @@ const InputField = ({
         {label}
       </label>
       {inputType === "text" && (
-        <div>
+        <div className="relative overflow-hidden">
           <input
             type="text"
             id={`inputfield--${label}`}
@@ -49,18 +49,18 @@ const InputField = ({
           {errorMessage[formfield] && (
             <ErrorMessage label={label} error={errorMessage[formfield]} />
           )}
+          <div className={`${style["input--border"]}`}></div>
         </div>
       )}
       {inputType === "textarea" && (
-        <div>
+        <div className="relative overflow-hidden">
           <textarea
-            className={[style["input--field"], style["input--textArea"]].join(
-              " "
-            )}
+            className={`${style["input--field"]}`}
             rows={1}
             placeholder={placeholderText}
             {...registerField(formfield, validationRules)}
           />
+          <div className={`${style["input--border"]}`}></div>
           {errorMessage[formfield] && (
             <ErrorMessage label={label} error={errorMessage[formfield]} />
           )}

@@ -25,7 +25,7 @@ const PortfolioLink = ({
         target="_blank"
         download={download}
         className={`${style.link}  ${
-          style[`link-${buttonStyle} ${style[`link-${type}`]}`]
+          style[`btn link-${buttonStyle}  ${style[`link-${type}`]}`]
         }`}
       >
         {children}
@@ -37,7 +37,7 @@ const PortfolioLink = ({
         href={link}
         target="_blank"
         download={download}
-        className={`${style.link} ${style[`link-${type}`]}`}
+        className={` ${style.btn} ${style[`link-${type}`]}`}
       >
         {label}
       </a>

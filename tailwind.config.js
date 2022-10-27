@@ -26,10 +26,22 @@ module.exports = {
         portfolio_white: "#FEFEFE",
         portfolio_grey_dark: "#292724",
         portfolio_grey_light: "#282828",
-        portfolio_blue: "#493ADB",
+        portfolio_blue: "#502CE3",
       },
       transitionTimingFunction: {
         buttonHover: "cubic-bezier(0.5, 0, 0, 1)",
+      },
+      transitionProperty: {
+        height: "height",
+        spacing: "margin, padding",
+        width: "width",
+      },
+      boxShadow: {
+        btn_hover: " 0 0 10px 0 rgba(0, 0, 0, 0.3)",
+      },
+      screens: {
+        xs: { min: "240px", max: "374px" },
+        xxs: { min: "350px", max: "639px" },
       },
     },
   },

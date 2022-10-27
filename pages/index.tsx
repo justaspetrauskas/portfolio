@@ -2,9 +2,9 @@ import groq from "groq";
 import Head from "next/head";
 import Image from "next/image";
 import sanityClient from "../client";
-import { useCallback, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchProfile, setProfileData } from "../redux/slices/profileSlice";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setProfileData } from "../redux/slices/profileSlice";
 import Header from "../components/HeaderComponent/Header";
 import HelloSection from "../sections/Hello.Section/HelloSection";
 import AboutSection from "../sections/AboutMe.Section/AboutSection";
@@ -16,11 +16,16 @@ import ScrollableContainer from "../components/ScrollableContainer/ScrollableCon
 import useWindowSize, { Size } from "../hooks/useWindowSize";
 import useWindowScroll from "../hooks/useWindowScroll";
 import SkillsSection from "../sections/Skills.Section/SkillsSection";
+import { Profile } from "../types/types.profile";
+import ProjectsSecion from "../sections/Projects.Section/ProjectsSecion";
+
+type dataStatus = "idle" | "error" | "success";
 
 interface HomeProps {
-  profileData: any;
+  profileData: Profile;
+  dataStatus: dataStatus;
 }
-const Home = ({ profileData }: HomeProps) => {
+const Home = ({ profileData, dataStatus }: HomeProps) => {
   const windowSize: Size = useWindowSize();
   const scrollPosition = useWindowScroll();
   const dispatch = useDispatch();
@@ -28,8 +33,10 @@ const Home = ({ profileData }: HomeProps) => {
   // console.log(scrollPosition);
 
   useEffect(() => {
-    dispatch(setProfileData(profileData));
-  }, [profileData]);
+    if (dataStatus === "success" && profileData) {
+      dispatch(setProfileData(profileData));
+    }
+  }, [profileData, dataStatus]);
 
   return (
     <div>
@@ -38,32 +45,22 @@ const Home = ({ profileData }: HomeProps) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main className="relative">
-        <HelloSection />
-        <AboutSection />
-        <SkillsSection />
-        {/* <HelloSection id={"6"} />
-          <HelloSection id={"7"} /> */}
-        <ContactSection />
+      {dataStatus === "success" && (
+        <main className="relative">
+          <HelloSection />
+          <AboutSection />
+          <SkillsSection />
+          <ProjectsSecion />
 
-        {/* <ParallaxLayer
+          <ContactSection />
+
+          {/* <ParallaxLayer
             offset={1}
             speed={1.5}
             style={{ backgroundColor: "#ff6d6d" }}
           /> */}
-      </main>
-
-      {/* <footer className="flex h-24 w-full items-center justify-center border-t">
-        <a
-          className="flex items-center justify-center gap-2"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{" "}
-          <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-        </a>
-      </footer> */}
+        </main>
+      )}
     </div>
   );
 };
@@ -71,18 +68,37 @@ const Home = ({ profileData }: HomeProps) => {
 export async function getStaticProps() {
   const params = { profileId: process.env.NEXT_PUBLIC_SANITY_PROFILEID };
   const query = groq`*[_type == "profile" && _id == $profileId]{
-    "hello":greeting,firstName,lastName,currentLocation,socialLinks,
-    "profileImageURL":profileImage.asset->url,
-    "cvURL":cv.asset->url,education[]->{title,description,university},
-    experience[]->{jobTitle,company,description,startDate,endDate,tag[]->{skillTitle}},
-    education[]->{title,description,university,startDate,endDate},
-    aboutMe[]->{title,text,textIcon{secure_url}},
-    skills[]->{_id,skillTitle,skillIcon,category,skillIcon{secure_url}}}`;
-  const profileData = await sanityClient.fetch(query, params);
+    "greeting":greeting[],
+    firstName,
+    lastName,
+    
+    "socialLinks":socialLinks[]{_key,title,url,_type},
+    "profileImageUrl":profileImage.asset->url,
+    "cvURL":cv.asset->url,
+    // education[]->{title,description,university},
+    // experience[]->{jobTitle,company,description,startDate,endDate,tag[]->{skillTitle}},
+    // education[]->{title,description,university,startDate,endDate},
+    aboutMe[]->{title,"text":text[],"iconUrl":textIcon.secure_url},
+    skills[]->{_id,"title":skillTitle,category,"iconUrl":skillIcon.secure_url}}`;
+
+  // make try and catch block, status error
+  let profileData: Profile | null = null;
+  let dataStatus: dataStatus = "idle";
+
+  try {
+    const response: Profile[] = await sanityClient.fetch(query, params);
+    if (response) {
+      profileData = response[0];
+      dataStatus = "success";
+    }
+  } catch (err) {
+    dataStatus = "error";
+  }
 
   return {
     props: {
       profileData,
+      dataStatus,
     },
   };
 }
