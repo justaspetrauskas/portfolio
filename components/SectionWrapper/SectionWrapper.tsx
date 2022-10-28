@@ -10,12 +10,14 @@ interface SectionWrapperProps {
   sectionID: string;
   bgColor?: string;
   sectionRef?: any;
+  direction?: "row" | "column";
 }
 
 const SectionWrapper = ({
   children,
   sectionID,
   bgColor,
+  direction = "column",
 }: SectionWrapperProps) => {
   const dispatch = useDispatch();
   const sectionRef = useRef<any>(null);
@@ -35,7 +37,13 @@ const SectionWrapper = ({
       style={{ background: bgColor ? bgColor : "transparent" }}
       ref={sectionRef}
     >
-      <div className={style.container}>{children}</div>
+      <div
+        className={`${style.container} ${
+          direction === "row" ? style.row : style.column
+        }`}
+      >
+        {children}
+      </div>
     </section>
   );
 };

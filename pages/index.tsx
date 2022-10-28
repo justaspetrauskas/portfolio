@@ -72,7 +72,7 @@ export async function getStaticProps() {
     firstName,
     lastName,
     
-    "socialLinks":socialLinks[]{_key,title,url,_type},
+    "socialLinks":socialLinks[]{_key,title,url,type},
     "profileImageUrl":profileImage.asset->url,
     "cvURL":cv.asset->url,
     // education[]->{title,description,university},

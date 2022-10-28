@@ -1,3 +1,14 @@
 .linkCard {
   @apply p-2;
 }
+.header-container {
+  @apply flex
+  flex-col
+w-full lg:w-3/4  items-center
+
+  mb-8 lg:mb-12;
+}
+
+.header-container > q {
+  @apply py-2 text-center;
+}

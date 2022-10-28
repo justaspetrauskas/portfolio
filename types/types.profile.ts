@@ -1,7 +1,7 @@
 export interface SocialLink {
   title: string;
   url: string;
-  _type: string;
+  type: string;
   _key: string;
 }
 

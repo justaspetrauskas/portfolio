@@ -9,6 +9,8 @@ import useOnScreen from "../../hooks/useOnScreen";
 import { selectProfileState } from "../../redux/store";
 import SocialLinks from "./SocialLinks";
 
+import style from "./contact.module.css";
+
 const ContactSection = () => {
   const contactRef: any = useRef<HTMLDivElement>(null);
   const profile = useSelector(selectProfileState);
@@ -19,12 +21,13 @@ const ContactSection = () => {
   // }, [profile]);
 
   return (
-    <SectionWrapper sectionID={"contact"}>
-      <div className="flex flex-col w-full items-center justify-strecth gap-y-4">
+    <SectionWrapper sectionID={"contact"} direction="row">
+      <div className={style["header-container"]}>
         <SectionHeader title={"Contact me"} position={"center"} />
         {/* Subtitle */}
+        <q>There are million reasons to start a day...</q>
         {/* socials */}
-        <SocialLinks links={profile.socialLinks} />
+        {profile && <SocialLinks links={profile!.socialLinks} />}
       </div>
 
       <ContactForm />
