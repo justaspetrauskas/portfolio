@@ -1,5 +1,5 @@
 .submit {
-  @apply mt-0 sm:mt-12 uppercase relative 
+  @apply mt-0 sm:mt-4 md:mt-8 uppercase relative 
     tracking-wide text-base font-medium 
     justify-center transition w-48 z-20
     inline-flex;
@@ -23,7 +23,7 @@
 
 .submit:hover:not(.submitted, .submit:disabled) .submit-content,
 .submit:focus:not(.submitted, .submit:disabled) .submit-content {
-  @apply text-portfolio_white shadow-btn_hover border-portfolio_blue shadow-portfolio_blue;
+  @apply text-portfolio_grey_dark shadow-btn_hover border-portfolio_blue shadow-portfolio_blue;
 }
 
 .submit.submitted .submit-content {

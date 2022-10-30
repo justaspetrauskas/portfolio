@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState, MutableRefObject } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ContactFormFields } from "../../types/types.contact";
 import InputField from "./InputField";
@@ -8,18 +8,21 @@ import emailjs from "@emailjs/browser";
 import style from "./contactForm.module.css";
 import ContentRow from "../ContentRow/ContentRow";
 import SubmitButton from "../SubmitButton/SubmitButton";
-import { emailJS } from "../../config";
+import { emailJS, recaptcha } from "../../config";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const validation = {
   email: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i,
 };
 
 const ContactForm = () => {
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
   const {
     register,
     getValues,
     formState: { errors, isDirty, isValid, touchedFields },
     handleSubmit,
+    reset,
   } = useForm<ContactFormFields>({
     mode: "onChange", // "onChange"
     reValidateMode: "onChange",
@@ -32,11 +35,17 @@ const ContactForm = () => {
   const onSubmit = async () => {
     const formValues = getValues() as Record<string, any>;
     const { serviceId, templateId, publicKey } = emailJS;
+    const token = await recaptchaRef.current!.executeAsync();
+    const params = { ...formValues, "g-recaptcha-response": token };
 
-    emailjs.send(serviceId, templateId, formValues, publicKey).then(
+    emailjs.send(serviceId, templateId, params, publicKey).then(
       (response) => {
         console.log("SUCCESS!", response.status, response.text);
         setMessageStatus("SENT");
+        reset();
+        setTimeout(() => {
+          setMessageStatus("IDLE");
+        }, 5000);
       },
       (err) => {
         console.log("FAILED...", err);
@@ -45,8 +54,22 @@ const ContactForm = () => {
     );
   };
 
+  const handleRecaptcha = (value: any) => {
+    console.log("working", value);
+  };
+
+  const handleFormReset = () => {
+    if (messageStatus === "SENT") {
+      // field empty
+    }
+  };
+
   return (
-    <form className={style.contactWrapper} onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className={style.contactWrapper}
+      onSubmit={handleSubmit(onSubmit)}
+      // onClick={handleFormReset}
+    >
       <InputField
         inputType="text"
         required={true}
@@ -77,6 +100,14 @@ const ContactForm = () => {
         validationRules={{ required: true }}
         errorMessage={errors}
       />
+      <ReCAPTCHA
+        ref={recaptchaRef}
+        size="invisible"
+        sitekey={recaptcha.siteKey}
+        // onChange={handleRecaptcha}
+        theme="light"
+      />
+
       <SubmitButton
         disabled={!isDirty || !isValid}
         messageStatus={messageStatus}

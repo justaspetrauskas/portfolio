@@ -11,13 +11,15 @@ import SkillsWrapper from "../../components/SkillsWrapper/SkillsWrapper";
 import useOnScreen from "../../hooks/useOnScreen";
 import { selectNavigationSlice, selectProfileState } from "../../redux/store";
 import { Skill } from "../../types/types.profile";
-const skillCategories = [
-  { title: "All", value: "all" },
-  { title: "Front-end", value: "front-end" },
-  { title: "Back-end", value: "back-end" },
-  { title: "Others", value: "others" },
-  { title: "Graphic Design", value: "graphicDesign" },
-  { title: "Language", value: "language" },
+import { OptionType } from "../../types/types.select";
+
+const skillCategories: OptionType[] = [
+  { label: "All", value: "all" },
+  { label: "Front-end", value: "front-end" },
+  { label: "Back-end", value: "back-end" },
+  { label: "Others", value: "others" },
+  { label: "Graphic Design", value: "graphicDesign" },
+  { label: "Language", value: "language" },
 ];
 const SkillsSection = () => {
   const skillsRef: any = useRef(null);
@@ -25,7 +27,10 @@ const SkillsSection = () => {
   const { activeSection } = useSelector(selectNavigationSlice);
 
   const [showingSkills, setShowingSkills] = useState<Skill[]>([]);
-  const [activeCategory, setActiveCategory] = useState("all");
+  const [activeCategory, setActiveCategory] = useState<OptionType>({
+    label: "All",
+    value: "all",
+  });
 
   const [sectionOnScreen, setOnScreen] = useState(true);
 
@@ -47,29 +52,34 @@ const SkillsSection = () => {
 
   useEffect(() => {
     if (profile) {
-      console.log(profile);
-      setShowingSkills(profile!.skills);
+      setShowingSkills(profile.skills);
     }
   }, [profile]);
+
+  useEffect(() => {
+    if (profile) {
+      if (activeCategory.value === "all") {
+        setShowingSkills(profile.skills);
+      } else {
+        const filteredValues = profile.skills.filter(
+          (el: Skill) => el.category === activeCategory.value
+        );
+        setShowingSkills(filteredValues);
+      }
+    }
+  }, [profile, activeCategory]);
 
   const skills = useTransition(sectionOnScreen ? showingSkills : [], {
     trail: 200 / showingSkills.length,
     config: config.gentle,
     from: { opacity: 0, height: 0 },
     enter: { opacity: 1, height: 100 },
-    leave: { opacity: 0, height: 0 },
+    leave: { height: 0, display: "none" },
   });
 
-  const filterSkills = (category: string) => {
-    setActiveCategory(category);
-    // if (category === "all") {
-    //   setShowingSkills(profile.skills);
-    // } else {
-    //   const filteredValues = profile.skills.filter(
-    //     (el: Record<string, any>) => el.category === category
-    //   );
-    //   setShowingSkills(filteredValues);
-    // }
+  const handleSelect = (option: any) => {
+    console.log(option);
+    setActiveCategory(option);
   };
   return (
     <SectionWrapper sectionID={"skills"}>
@@ -79,13 +89,17 @@ const SkillsSection = () => {
           <PillButton
             key={index}
             type={"transparent"}
-            active={el.value === activeCategory}
-            title={el.title}
-            clickHandler={() => filterSkills(el.value)}
+            active={el.value === activeCategory.value}
+            title={el.label}
+            clickHandler={() => handleSelect(el)}
           />
         ))}
       </ButtonGroup>
-      <SkillSelector options={skillCategories} />
+      <SkillSelector
+        options={skillCategories}
+        selectedValue={activeCategory}
+        handleSelect={handleSelect}
+      />
       <SkillsWrapper>
         {skills((style, item) => (
           <SkillCard data={item} key={item._id.split("-")[1]} style={style} />

@@ -1,5 +1,5 @@
 import React from "react";
-import style from "../../styles/contentRow.module.css";
+import style from "./contentRow.module.css";
 
 interface ContentRowProps {
   children: React.ReactNode;

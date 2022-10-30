@@ -22,7 +22,7 @@
 
 /* content container */
 .container {
-  @apply w-full md:w-[90vw] lg:w-[75vw] mx-auto px-8 h-full
+  @apply w-full md:w-[90vw] lg:w-[85vw] xl:w-[75vw] mx-auto px-8 h-full
   flex items-center lg:items-start justify-center;
 }
 

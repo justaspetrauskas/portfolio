@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
+import ProjectSlider from "../../components/ProjectSlider/ProjectSlider";
 import SectionHeader from "../../components/SectionHeader/SectionHeader";
 import SectionWrapper from "../../components/SectionWrapper/SectionWrapper";
 import { selectProfileState } from "../../redux/store";
@@ -15,7 +16,7 @@ const ProjectsSecion = () => {
   return (
     <SectionWrapper sectionID={"projects"}>
       <SectionHeader position="left" title={"Projects"} />
-      project section
+      <ProjectSlider />
     </SectionWrapper>
   );
 };
