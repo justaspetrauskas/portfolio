@@ -1,9 +1,14 @@
+.fullwidth {
+  @apply w-full md:w-[90vw] lg:w-[85vw] xl:w-[75vw] mx-auto  md:px-0 h-full
+  flex items-center lg:items-start justify-center md:justify-start;
+}
+
 .section-header {
-  @apply w-full inline text-4xl sm:text-5xl 
+  @apply text-4xl sm:text-5xl 
   font-extrabold py-6 text-portfolio_blue;
 }
 .section-header--text {
-  @apply w-full uppercase tracking-wider;
+  @apply uppercase tracking-wider;
   animation: 1s ease-out 0s 1 slideInFromLeft;
 }
 /* .section-header--text::after {

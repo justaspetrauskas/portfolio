@@ -1,3 +1,68 @@
 .container {
-  @apply w-full h-full min-h-[320px];
+  @apply w-[200%] h-full flex 
+  justify-between py-8 gap-x-4 text-portfolio_grey_dark;
+}
+
+/* slider item */
+.project {
+  @apply rounded-sm border border-portfolio_grey_dark my-16 h-[calc(100vh*0.6)]
+  relative shrink min-w-[calc((100vw-2rem))] md:min-w-[calc((100vw-2rem)/3)] lg:min-w-[calc((100vw-2rem)/5)]
+  mx-12 
+  flex-grow-0 bg-portfolio_white shadow-btn_hover;
+}
+
+.image-container {
+  @apply h-2/3 bg-portfolio_blue rounded-sm
+  flex items-center justify-center;
+}
+
+.image-title {
+  @apply uppercase font-semibold text-2xl text-portfolio_white;
+}
+
+.body {
+  @apply px-4 py-2 flex flex-col justify-between h-1/3;
+}
+
+.title > h6 {
+  @apply text-xl capitalize font-semibold;
+}
+.title > p {
+  @apply capitalize font-medium text-sm;
+}
+
+.tags {
+  @apply mt-4;
+}
+
+.single-tag {
+  @apply px-2 py-0.5
+  italic cursor-default
+  bg-portfolio_grey_light/10 rounded-sm;
+}
+.single-tag:not(:first-child) {
+  @apply ml-2;
+}
+.breakline {
+  @apply h-[0.1rem]
+  rounded-full
+  bg-portfolio_blue w-9/12 mx-auto;
+}
+
+.links {
+  @apply flex flex-row  gap-x-4;
+}
+.single-link {
+  @apply text-portfolio_grey_dark px-1 fill-portfolio_grey_dark
+  transition;
+}
+.single-link:hover {
+  @apply border-b border-b-portfolio_blue text-portfolio_blue 
+  fill-portfolio_blue;
+}
+
+.single-link--inner {
+  @apply inline-flex flex-row 
+
+  items-center gap-x-2;
 }

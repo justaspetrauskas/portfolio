@@ -13,7 +13,7 @@ interface ILinkIcon {
 }
 const LinkIcon = ({ linkType, size }: ILinkIcon) => {
   switch (linkType) {
-    case "linkedid":
+    case "linkedin":
       return <FaLinkedin size={size} fill={"#282828"} />;
 
     case "github":

@@ -11,6 +11,7 @@ interface SectionWrapperProps {
   bgColor?: string;
   sectionRef?: any;
   direction?: "row" | "column";
+  fullwidth?: boolean;
 }
 
 const SectionWrapper = ({
@@ -18,6 +19,7 @@ const SectionWrapper = ({
   sectionID,
   bgColor,
   direction = "column",
+  fullwidth = false,
 }: SectionWrapperProps) => {
   const dispatch = useDispatch();
   const sectionRef = useRef<any>(null);
@@ -38,9 +40,9 @@ const SectionWrapper = ({
       ref={sectionRef}
     >
       <div
-        className={`${style.container} ${
-          direction === "row" ? style.row : style.column
-        }`}
+        className={`${
+          fullwidth ? style["fullwidth-container"] : style.container
+        } ${direction === "row" ? style.row : style.column}`}
       >
         {children}
       </div>

@@ -17,7 +17,7 @@ import useWindowSize, { Size } from "../hooks/useWindowSize";
 import useWindowScroll from "../hooks/useWindowScroll";
 import SkillsSection from "../sections/Skills.Section/SkillsSection";
 import { Profile } from "../types/types.profile";
-import ProjectsSecion from "../sections/Projects.Section/ProjectsSecion";
+import ProjectsSecion from "../sections/Projects.Section/ProjectsSection";
 
 type dataStatus = "idle" | "error" | "success";
 

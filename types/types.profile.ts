@@ -24,12 +24,21 @@ export interface AboutMe {
   text: RichText[];
 }
 
+export interface Project {
+  title: string;
+  subtitle: string;
+  imageUrl?: string;
+  links: string[];
+  tags: string[];
+}
+
 export interface Profile {
   aboutMe: AboutMe[];
   greeting: RichText[];
   cvURL: string;
   firstName: string;
   lastName: string;
+  projects?: Project[];
   profileImageUrl: string;
   skills: Skill[];
   socialLinks: SocialLink[];

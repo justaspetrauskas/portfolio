@@ -14,8 +14,9 @@ const ProjectsSecion = () => {
   //     }
   //   }, [profile]);
   return (
-    <SectionWrapper sectionID={"projects"}>
-      <SectionHeader position="left" title={"Projects"} />
+    <SectionWrapper sectionID={"projects"} fullwidth>
+      <div></div>
+      <SectionHeader position="left" title={"Projects"} fullwidth />
       <ProjectSlider />
     </SectionWrapper>
   );

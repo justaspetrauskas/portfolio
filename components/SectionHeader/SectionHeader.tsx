@@ -6,14 +6,21 @@ import style from "./sectionHeader.module.css";
 interface SectionHeaderProps {
   title: string;
   position: "center" | "left" | "right";
+  fullwidth: boolean;
 }
 
-const SectionHeader = ({ title, position = "center" }: SectionHeaderProps) => {
+const SectionHeader = ({
+  title,
+  position = "center",
+  fullwidth = false,
+}: SectionHeaderProps) => {
   const velocity = useSelector(selectScrollState);
 
   return (
     <div
-      className={style["section-header"]}
+      className={`${style["section-header"]} ${
+        fullwidth ? style["fullwidth"] : ""
+      }`}
       // style={{
       //   transform: `translateY(${velocity.velocityVal * 270}px)`,
       // }}

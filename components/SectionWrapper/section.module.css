@@ -33,3 +33,8 @@
 .row {
   @apply flex-col lg:flex-row items-center gap-4;
 }
+
+/* for the slider */
+.fullwidth-container {
+  @apply w-full overflow-hidden;
+}
